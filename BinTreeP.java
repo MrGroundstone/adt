@@ -3,44 +3,44 @@ package adt;
 import processing.core.PApplet;
 
 /**
- * Implementierung der Klasse BinTreeP (Binärbaum):
+ * Implementierung der Klasse BinTreeP (Binï¿½rbaum):
  * 
- * Die Implementierung lässt als Inhalte Zeichenketten und Ganzzahlen zu.
+ * Die Implementierung lï¿½sst als Inhalte Zeichenketten und Ganzzahlen zu.
  * 
- * Die interne Verwaltung des Inhalts des Binärbaums erfolgt über eine interne
+ * Die interne Verwaltung des Inhalts des Binï¿½rbaums erfolgt ï¿½ber eine interne
  * Klasse Inhalt.
  * 
- * Die Funktionalität und die Bezeichnungen des Binärbaums entsprechen den
- * Vorgaben der Thematischen Schwerpunkte für die schriftliche Abiturprüfung
+ * Die Funktionalitï¿½t und die Bezeichnungen des Binï¿½rbaums entsprechen den
+ * Vorgaben der Thematischen Schwerpunkte fï¿½r die schriftliche Abiturprï¿½fung
  * 2018 in Informatik in Niedersachsen. Das bedeutet auch, dass in der
  * Implementierung keine "Absicherungen" enthalten sind, die z. B. das Entnehmen
- * bei einem leeren Binärbaum verhindern.
+ * bei einem leeren Binï¿½rbaum verhindern.
  *
- * Alternativ ließe sich auch eine spezielle Klasse Binärbaum implementieren,
+ * Alternativ lieï¿½e sich auch eine spezielle Klasse Binï¿½rbaum implementieren,
  * die die konkrete Inhaltsklasse der bearbeiteten Aufgabenstellung verwendet.
- * Dazu müsste aber für jede Aufgabe ggf. eine neue Klasse Binärbaum erzeugt
+ * Dazu mï¿½sste aber fï¿½r jede Aufgabe ggf. eine neue Klasse Binï¿½rbaum erzeugt
  * werden. Nutzt man als Inhaltsklasse die sehr allgemeine Java-Klasse Object,
- * so ist diese zwar universell nutzbar, man benötigt beim Zugriff auf den
- * Binärbaum dann aber häufig Typecasting.
+ * so ist diese zwar universell nutzbar, man benï¿½tigt beim Zugriff auf den
+ * Binï¿½rbaum dann aber hï¿½ufig Typecasting.
  * 
  * Update: Hendrik Bodenstein 16.12.2024
  */
 public class BinTreeP {
 
-	// Button-Koordinaten und Größen
+	// Button-Koordinaten und Grï¿½ï¿½en
 	private int addButtonX = 50, addButtonY = 400, addButtonW = 150, addButtonH = 50;
 	private int resetButtonX = 250, resetButtonY = 400, resetButtonW = 150, resetButtonH = 50;
 
 	// Benutzer-Input
-	private String inputText = ""; // Eingabetext für neue Knoten
-	private boolean isAddingNode = false; // Status, ob ein neuer Knoten hinzugefügt wird
+	private String inputText = ""; // Eingabetext fï¿½r neue Knoten
+	private boolean isAddingNode = false; // Status, ob ein neuer Knoten hinzugefï¿½gt wird
 
 	private Inhalt inh = new Inhalt(); // Inhalt der Wurzel des Baumes
 	private BinTreeP links = null; // linker Teilbaum
 	private BinTreeP rechts = null; // rechter Teilbaum
 
 	/*
-	 * Ein leerer Binärbaum wird angelegt.
+	 * Ein leerer Binï¿½rbaum wird angelegt.
 	 */
 	public BinTreeP() {
 		inh = new Inhalt();
@@ -49,21 +49,21 @@ public class BinTreeP {
 	}
 
 	/*
-	 * Ein Binärbaum mit dem übergebenen Inhalt wird angelegt.
+	 * Ein Binï¿½rbaum mit dem ï¿½bergebenen Inhalt wird angelegt.
 	 */
 	public BinTreeP(Inhalt i) {
 		inh = i;
 	}
 
 	/*
-	 * Ein Binärbaum mit der übergebenen Zeichenkette als Inhalt wird angelegt.
+	 * Ein Binï¿½rbaum mit der ï¿½bergebenen Zeichenkette als Inhalt wird angelegt.
 	 */
 	public BinTreeP(String s) {
 		inh.setText(s);
 	}
 
 	/*
-	 * Ein Binärbaum mit der Ã¼bergebenen Ganzzahl als Inhalt wird angelegt.
+	 * Ein Binï¿½rbaum mit der Ã¼bergebenen Ganzzahl als Inhalt wird angelegt.
 	 */
 	public BinTreeP(int z) {
 		inh.setZahl(z);
@@ -133,7 +133,7 @@ public class BinTreeP {
 
 	/*
 	 * Wenn die Wurzel des Baumes keinen Inhalt besitzt, wird der Wert wahr
-	 * zurückgegeben, sonst der Wert falsch.
+	 * zurï¿½ckgegeben, sonst der Wert falsch.
 	 */
 	public boolean hasItem() {
 		if (inh.istLeer()) {
@@ -143,21 +143,21 @@ public class BinTreeP {
 	}
 
 	/*
-	 * Der Inhalt der Wurzel des Baumes wird zurückgegeben.
+	 * Der Inhalt der Wurzel des Baumes wird zurï¿½ckgegeben.
 	 */
 	public Inhalt getItem() {
 		return inh;
 	}
 
 	/*
-	 * Der Inhalt der Wurzel des Baumes wird auf den übergebenen Inhalt gesetzt.
+	 * Der Inhalt der Wurzel des Baumes wird auf den ï¿½bergebenen Inhalt gesetzt.
 	 */
 	public void setItem(Inhalt inhalt) {
 		inh = inhalt;
 	}
 
 	/*
-	 * Der Inhalt der Wurzel des Baumes wird gelöscht.
+	 * Der Inhalt der Wurzel des Baumes wird gelï¿½scht.
 	 */
 	public void deleteItem() {
 		inh = new Inhalt();
@@ -165,7 +165,7 @@ public class BinTreeP {
 
 	/*
 	 * Wenn es sich bei dem Baum um ein Blatt handelt, wird der Wert wahr
-	 * zurückgegeben, sonst der Wert falsch.
+	 * zurï¿½ckgegeben, sonst der Wert falsch.
 	 */
 	public boolean isLeaf() {
 		if ((!inh.istLeer()) && (links == null) && (rechts == null)) {
@@ -176,28 +176,28 @@ public class BinTreeP {
 
 	/*
 	 * Wenn der Baum einen linken Teilbaum besitzt, wird der Wert wahr
-	 * zurückgegeben, sonst der Wert falsch.
+	 * zurï¿½ckgegeben, sonst der Wert falsch.
 	 */
 	public Boolean hasLeft() {
 		return links != null;
 	}
 
 	/*
-	 * Der linke Teilbaum des Baumes wird zurückgegeben.
+	 * Der linke Teilbaum des Baumes wird zurï¿½ckgegeben.
 	 */
 	public BinTreeP getLeft() {
 		return links;
 	}
 
 	/*
-	 * Der linke Teilbaum des Baumes wird auf den übergebenen Baum gesetzt.
+	 * Der linke Teilbaum des Baumes wird auf den ï¿½bergebenen Baum gesetzt.
 	 */
 	public void setLeft(BinTreeP b) {
 		links = b;
 	}
 
 	/*
-	 * Der linke Teilbaum des Baumes wird gelöscht.
+	 * Der linke Teilbaum des Baumes wird gelï¿½scht.
 	 */
 	public void deleteLeft() {
 		links = null;
@@ -205,35 +205,35 @@ public class BinTreeP {
 
 	/*
 	 * Wenn der Baum einen linken Teilbaum besitzt, wird der Wert wahr
-	 * zurückgegeben, sonst der Wert falsch.
+	 * zurï¿½ckgegeben, sonst der Wert falsch.
 	 */
 	public Boolean hasRight() {
 		return rechts != null;
 	}
 
 	/*
-	 * Der rechte Teilbaum des Baumes wird zurückgegeben.
+	 * Der rechte Teilbaum des Baumes wird zurï¿½ckgegeben.
 	 */
 	public BinTreeP getRight() {
 		return rechts;
 	}
 
 	/*
-	 * Der rechte Teilbaum des Baumes wird auf den übergebenen Baum gesetzt.
+	 * Der rechte Teilbaum des Baumes wird auf den ï¿½bergebenen Baum gesetzt.
 	 */
 	public void setRight(BinTreeP b) {
 		rechts = b;
 	}
 
 	/*
-	 * Der linke Teilbaum des Baumes wird gelöscht.
+	 * Der linke Teilbaum des Baumes wird gelï¿½scht.
 	 */
 	public void deleteRight() {
 		rechts = null;
 	}
 
 	/*
-	 * Visualisierung eines Binärbaums in Processing - Wrapper-Methode
+	 * Visualisierung eines Binï¿½rbaums in Processing - Wrapper-Methode
 	 */
 	float translateX = 0, translateY = 0, scaleFactor = (float)1.0;
 
@@ -244,7 +244,7 @@ public class BinTreeP {
 	}
 
 	/*
-	 * Methode zur Bestimmung der Tiefe, die für das Zeichnen benötigt wird.
+	 * Methode zur Bestimmung der Tiefe, die fï¿½r das Zeichnen benï¿½tigt wird.
 	 */
 	private int getTiefe() {
 		if (!hasItem()) {
@@ -278,7 +278,7 @@ public class BinTreeP {
 	    }
 
 	    sketch.fill(255);
-	    sketch.ellipse(x, y, 30, 30); // Kreis für den Knoten
+	    sketch.ellipse(x, y, 30, 30); // Kreis fï¿½r den Knoten
 	    sketch.fill(0);
 	    sketch.textAlign(PApplet.CENTER, PApplet.CENTER);
 	    if (BinTreeP.getItem().getZahl() != -1) {
@@ -289,7 +289,7 @@ public class BinTreeP {
 	}
 
 
-	//Ab hier Implementation von Interaktionsmöglichkeiten in Processing
+	//Ab hier Implementation von Interaktionsmï¿½glichkeiten in Processing
 	public void drawButtons(PApplet sketch) {
 		drawButton(sketch, addButtonX, addButtonY, addButtonW, addButtonH, "Add Node");
 		drawButton(sketch, resetButtonX, resetButtonY, resetButtonW, resetButtonH, "Reset Tree");
@@ -312,7 +312,7 @@ public class BinTreeP {
 		// "Add Node"-Button
 		if (mouseX > addButtonX && mouseX < addButtonX + addButtonW && mouseY > addButtonY
 				&& mouseY < addButtonY + addButtonH) {
-			isAddingNode = true; // Aktiviert den Modus für das Hinzufügen
+			isAddingNode = true; // Aktiviert den Modus fï¿½r das Hinzufï¿½gen
 		}
 
 		// "Reset Tree"-Button
@@ -327,15 +327,15 @@ public class BinTreeP {
 	public void handleInput(char key) {
 		if (key == '\n') { // Enter-Taste
 			if (isAddingNode && inputText.length() > 0) {
-				// Neuen Knoten hinzufügen
+				// Neuen Knoten hinzufï¿½gen
 				try {
-					int value = Integer.parseInt(inputText); // Zahl hinzufügen
+					int value = Integer.parseInt(inputText); // Zahl hinzufï¿½gen
 					addNodeToTree(value);
 				} catch (NumberFormatException e) {
-					addNodeToTree(inputText); // Zeichenkette hinzufügen
+					addNodeToTree(inputText); // Zeichenkette hinzufï¿½gen
 				}
 
-				inputText = ""; // Eingabe zurücksetzen
+				inputText = ""; // Eingabe zurï¿½cksetzen
 				isAddingNode = false;
 			}
 		} else if (key == PApplet.BACKSPACE) {
@@ -344,18 +344,18 @@ public class BinTreeP {
 				inputText = inputText.substring(0, inputText.length() - 1);
 			}
 		} else {
-			inputText += key; // Neues Zeichen hinzufügen
+			inputText += key; // Neues Zeichen hinzufï¿½gen
 		}
 	}
 
-	// Hilfsmethode zum Hinzufügen in die Baumstruktur
+	// Hilfsmethode zum Hinzufï¿½gen in die Baumstruktur
 	private void addNodeToTree(int value) {
 		if (inh.istLeer()) {
 			inh.setZahl(value); // Aktuellen Knoten initialisieren
 		} else if (links == null) {
-			links = new BinTreeP(value); // Links hinzufügen
+			links = new BinTreeP(value); // Links hinzufï¿½gen
 		} else if (rechts == null) {
-			rechts = new BinTreeP(value); // Rechts hinzufügen
+			rechts = new BinTreeP(value); // Rechts hinzufï¿½gen
 		} else {
 			if (Math.random() < 0.5) {
 				links.addNodeToTree(value);
@@ -365,14 +365,14 @@ public class BinTreeP {
 		}
 	}
 
-	// Hilfsmethode zum Hinzufügen in die Baumstruktur
+	// Hilfsmethode zum Hinzufï¿½gen in die Baumstruktur
 	private void addNodeToTree(String value) {
 		if (inh.istLeer()) {
 			inh.setText(value); // Aktuellen Knoten initialisieren
 		} else if (links == null) {
-			links = new BinTreeP(value); // Links hinzufügen
+			links = new BinTreeP(value); // Links hinzufï¿½gen
 		} else if (rechts == null) {
-			rechts = new BinTreeP(value); // Rechts hinzufügen
+			rechts = new BinTreeP(value); // Rechts hinzufï¿½gen
 		} else {
 			if (Math.random() < 0.5) {
 				links.addNodeToTree(value);
@@ -395,7 +395,7 @@ public class BinTreeP {
 
 
 	/*
-	 * Klasse Inhalt zur internen Verwaltung der einzelnen Elemente des Binärbaums.
+	 * Klasse Inhalt zur internen Verwaltung der einzelnen Elemente des Binï¿½rbaums.
 	 */
 	protected class Inhalt {
 		private int zahl = -1;
@@ -410,35 +410,35 @@ public class BinTreeP {
 		}
 
 		/*
-		 * Die Ganzzahl des Inhalts wird auf die übergebene Zahl gesetzt.
+		 * Die Ganzzahl des Inhalts wird auf die ï¿½bergebene Zahl gesetzt.
 		 */
 		public void setZahl(int z) {
 			zahl = z;
 		}
 
 		/*
-		 * Die Zeichenkette des Inhalts wird auf die übergebene Zeichenkette gesetzt.
+		 * Die Zeichenkette des Inhalts wird auf die ï¿½bergebene Zeichenkette gesetzt.
 		 */
 		public void setText(String s) {
 			text = s;
 		}
 
 		/*
-		 * Die Ganzzahl des Inhalts wird zurückgegeben.
+		 * Die Ganzzahl des Inhalts wird zurï¿½ckgegeben.
 		 */
 		public int getZahl() {
 			return zahl;
 		}
 
 		/*
-		 * Die Zeichenkette des Inhalts wird zurückgegeben.
+		 * Die Zeichenkette des Inhalts wird zurï¿½ckgegeben.
 		 */
 		public String getText() {
 			return text;
 		}
 
 		/*
-		 * Wenn der Inhalt leer ist, wird der Wert wahr zurückgegeben, sonst der Wert
+		 * Wenn der Inhalt leer ist, wird der Wert wahr zurï¿½ckgegeben, sonst der Wert
 		 * falsch.
 		 */
 		public boolean istLeer() {
