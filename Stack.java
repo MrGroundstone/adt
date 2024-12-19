@@ -9,20 +9,20 @@ public class Stack<T> {
 	 * Die Implementierung nutzt zur Verwaltung der Inhaltsklasse des Stapels
 	 * generische Datentypen. Das bedeutet, dass bei der Deklaration eines Stapel
 	 * die zu verwendende Inhaltsklasse mit angegeben werden muss. Die interne
-	 * Verwaltung des Inhalts des Stapels erfolgt über eine interne Klasse Item.
+	 * Verwaltung des Inhalts des Stapels erfolgt ï¿½ber eine interne Klasse Item.
 	 * 
-	 * Die Funktionalität und die Bezeichnungen des Stapels entsprechen den Vorgaben
-	 * der Thematischen Schwerpunkte für die schriftliche Abiturprüfung 2018 in
+	 * Die Funktionalitï¿½t und die Bezeichnungen des Stapels entsprechen den Vorgaben
+	 * der Thematischen Schwerpunkte fï¿½r die schriftliche Abiturprï¿½fung 2018 in
 	 * Informatik in Niedersachsen. Das bedeutet auch, dass in der Implementierung
 	 * keine "Absicherungen" enthalten sind, die z. B. das Entnehmen bei einem
 	 * leeren Stapel verhindern.
 	 *
-	 * Alternativ ließe sich auch eine spezielle Klasse Stapel implementieren, die
+	 * Alternativ lieï¿½e sich auch eine spezielle Klasse Stapel implementieren, die
 	 * die konkrete Inhaltsklasse der bearbeiteten Aufgabenstellung verwendet. Dazu
-	 * müsste aber für jede Aufgabe ggf. eine neue Klasse Stapel erzeugt werden.
+	 * mï¿½sste aber fï¿½r jede Aufgabe ggf. eine neue Klasse Stapel erzeugt werden.
 	 * Nutzt man als Inhaltsklasse die sehr allgemeine Java-Klasse Object, so ist
-	 * diese zwar universell nutzbar, man benötigt beim Zugriff auf den Stapel dann
-	 * aber häufig Typecasting.
+	 * diese zwar universell nutzbar, man benï¿½tigt beim Zugriff auf den Stapel dann
+	 * aber hï¿½ufig Typecasting.
 	 * 
 	 * Update: Hendrik Bodenstein, 16.12.2024
 	 */
@@ -37,7 +37,7 @@ public class Stack<T> {
 	}
 
 	/*
-	 * Wenn der Stapel kein Element besitzt, wird der Wert wahr zurückgegeben, sonst
+	 * Wenn der Stapel kein Element besitzt, wird der Wert wahr zurï¿½ckgegeben, sonst
 	 * der Wert falsch.
 	 */
 	public boolean isEmpty() {
@@ -50,7 +50,7 @@ public class Stack<T> {
 	}
 
 	/*
-	 * Der Inhalt des obersten Element des Stapels wird zurückgegeben, das Element
+	 * Der Inhalt des obersten Element des Stapels wird zurï¿½ckgegeben, das Element
 	 * aber nicht aus dem Stapel entfernt.
 	 */
 	public T top() {
@@ -58,7 +58,7 @@ public class Stack<T> {
 	}
 
 	/*
-	 * Der Inhalt des obersten Elements des Stapels wird zurückgegeben und das
+	 * Der Inhalt des obersten Elements des Stapels wird zurï¿½ckgegeben und das
 	 * Element dabei vom Stapel entfernt.
 	 */
 	public T pop1() {
@@ -68,7 +68,7 @@ public class Stack<T> {
 	}
 
 	/*
-	 * Ein neues Element mit dem übergebenen Inhalt wird auf dem Stapel abgelegt.
+	 * Ein neues Element mit dem ï¿½bergebenen Inhalt wird auf dem Stapel abgelegt.
 	 */
 	public void push1(T d) {
 		Item i = new Item(d);
@@ -77,44 +77,57 @@ public class Stack<T> {
 	}
 
 	/*
-	 * Zeichnet den Stack, für den die Operation aufgerufen wurde, in der Mitte des Fensters.
+	 * Zeichnet den Stack, fï¿½r den die Operation aufgerufen wurde, in der Mitte des Fensters.
 	 */
 	public void drawStack(PApplet sketch) {
 		drawStack(sketch, sketch.width/2);
 	}
 
 	/*
-	 * Zeichnet den Stack, für den die Operation aufgerufen wurde, beginnend bei der übergebenen x-Koordinate.
+	 * Zeichnet den Stack, fï¿½r den die Operation aufgerufen wurde, beginnend bei der ï¿½bergebenen x-Koordinate.
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes", "static-access" })
 	public void drawStack(PApplet sketch, float x) {
 		if (!isEmpty()) {
 			DynArray kopie = new DynArray();
 			int groesse = 0;
+			float largestItemsize = 0;
 
-			// Länge des Stapels bestimmen
+			// Lï¿½nge des Stapels bestimmen
 			while (!isEmpty()) {
 				kopie.append1(pop1());
 				groesse += 1;
 			}
 
-			// Rechteckhöhe berechnen
+			// Rechteckhï¿½he berechnen
 			float textSizeFactor = (float) 0.4;
 			float itemHeight = (sketch.height - sketch.height / 50) / groesse; // 10 Pixel Gesamtfreiraum
 			sketch.textSize(itemHeight * textSizeFactor);
 
-			// Vertikale Verschiebung für mittige Darstellung (inkl. 5 Pixel Freiraum oben)
+			// Vertikale Verschiebung fï¿½r mittige Darstellung (inkl. 5 Pixel Freiraum oben)
 			float offsetY = sketch.height / 100;
-			float stackWidth = itemHeight; // Der Stapel hat eine Breite, die der Rechteckhöhe entspricht
+
+			// LÃ¤ngstes Item des Stacks finden
+			largestItemsize = kopie.getItem(0).toString().length();
+			for (int i = 1; i < groesse ; i++) {
+				int current = kopie.getItem(i).toString().length();
+				if (largestItemsize < current) {
+					largestItemsize = current;
+				}
+			}
+
+			// Breite des Stacks passend zur GrÃ¶ÃŸe des lÃ¤ngsten Elements
+			// font pt zu px: px = pt * ( 72pt / 96 )
+			float stackWidth = (float) ((itemHeight * textSizeFactor * 0.75)* largestItemsize); // Der Stapel hat eine Breite, die der Rechteckhï¿½he entspricht
 
 			// Rechtecke im Stapel zeichnen
-			sketch.strokeWeight(1); // Zurücksetzen der Linienstärke für Rechtecke
+			sketch.strokeWeight(1); // Zurï¿½cksetzen der Linienstï¿½rke fï¿½r Rechtecke
 			for (int i = 0; i < groesse; i++) {
 				// Oberstes Element betrachten
 				T element = (T) kopie.getItem(i);
 
 				// Rechteck zeichnen
-				sketch.fill(255); // Weiß
+				sketch.fill(255); // Weiï¿½
 				sketch.rect(x-stackWidth/2, offsetY + i * itemHeight, stackWidth, itemHeight);
 
 				// Text in der Mitte des Rechtecks
@@ -126,7 +139,7 @@ public class Stack<T> {
 			// Rahmen um den Stack (nur unten, links und rechts) mit Freiraum
 			sketch.stroke(0); // Schwarz
 			sketch.strokeWeight(4); // Dicke der Umrandung
-			sketch.noFill(); // Keine Füllung
+			sketch.noFill(); // Keine Fï¿½llung
 			// Linke Linie
 			sketch.line(x-stackWidth/2, offsetY, // Freiraum oben
 					x-stackWidth/2, offsetY + groesse * itemHeight // Freiraum unten
