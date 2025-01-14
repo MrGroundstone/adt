@@ -12,12 +12,12 @@ import processing.core.PApplet;
  * verwendet Processing für die grafische Darstellung und Swing für
  * Dialogfenster.
  *
- * @author (Ihr Name oder ursprünglicher Autor, falls bekannt)
+ * @author Hendrik Bodenstein
  * @version 1.0
  */
 public class BinTreeGUI extends PApplet {
 
-	private BinTreeP binTree;
+	private BinTree binTree;
 	private PApplet sketch;
 	private int buttonColor = 255;
 	private int highlightColor = 150;
@@ -39,7 +39,7 @@ public class BinTreeGUI extends PApplet {
 	 *
 	 * @param binTree Der zugehörige Binärbaum.
 	 */
-	public BinTreeGUI(BinTreeP binTree) {
+	public BinTreeGUI(BinTree binTree) {
 		this.binTree = binTree;
 	}
 
@@ -114,22 +114,22 @@ public class BinTreeGUI extends PApplet {
 	/**
 	 * Zeichnet den Baum rekursiv.
 	 *
-	 * @param BinTreeP Der aktuelle Knoten.
+	 * @param bintree  Der aktuelle Knoten.
 	 * @param x        Die x-Koordinate des Knotens.
 	 * @param y        Die y-Koordinate des Knotens.
 	 * @param hSpacing Der horizontale Abstand zwischen den Knoten.
 	 * @param depth    Die aktuelle Tiefe im Baum.
 	 */
-	private void drawTree(BinTreeP BinTreeP, float x, float y, int hSpacing, int depth) {
-		if (BinTreeP == null || !BinTreeP.hasItem() || depth < 0) {
+	private void drawTree(BinTree bintree, float x, float y, int hSpacing, int depth) {
+		if (bintree == null || !bintree.hasItem() || depth < 0) {
 			sketch.background(200); // Hintergrund neu zeichnen, falls der Baum leer ist
 			return;
 		}
 
-		if (BinTreeP.hasLeft() && BinTreeP.getLeft() != null && BinTreeP.getLeft().hasItem()) {
+		if (bintree.hasLeft() && bintree.getLeft() != null && bintree.getLeft().hasItem()) {
 			sketch.line(x, y, x - hSpacing, y + 50);
 		}
-		if (BinTreeP.hasRight() && BinTreeP.getRight() != null && BinTreeP.getRight().hasItem()) {
+		if (bintree.hasRight() && bintree.getRight() != null && bintree.getRight().hasItem()) {
 			sketch.line(x, y, x + hSpacing, y + 50);
 		}
 
@@ -138,18 +138,18 @@ public class BinTreeGUI extends PApplet {
 
 		sketch.fill(0);
 		sketch.textAlign(PApplet.CENTER, PApplet.CENTER);
-		if (BinTreeP.getItem().getZahl() != -1) {
-			sketch.text("" + BinTreeP.getItem().getZahl(), x, y);
+		if (bintree.getItem().getZahl() != -1) {
+			sketch.text("" + bintree.getItem().getZahl(), x, y);
 		} else {
-			sketch.text(BinTreeP.getItem().getText(), x, y);
+			sketch.text(bintree.getItem().getText(), x, y);
 		}
 
-		if (BinTreeP.hasLeft() && BinTreeP.getLeft() != null && BinTreeP.getLeft().hasItem()) {
-			drawTree(BinTreeP.getLeft(), x - hSpacing, y + 50, hSpacing / 2, depth - 1);
+		if (bintree.hasLeft() && bintree.getLeft() != null && bintree.getLeft().hasItem()) {
+			drawTree(bintree.getLeft(), x - hSpacing, y + 50, hSpacing / 2, depth - 1);
 		}
 
-		if (BinTreeP.hasRight() && BinTreeP.getRight() != null && BinTreeP.getRight().hasItem()) {
-			drawTree(BinTreeP.getRight(), x + hSpacing, y + 50, hSpacing / 2, depth - 1);
+		if (bintree.hasRight() && bintree.getRight() != null && bintree.getRight().hasItem()) {
+			drawTree(bintree.getRight(), x + hSpacing, y + 50, hSpacing / 2, depth - 1);
 		}
 	}
 
