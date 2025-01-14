@@ -49,18 +49,30 @@ Dieses Projekt implementiert vier grundlegende Datenstrukturen: einen Binärbaum
   - `dequeue()`: Entfernt das erste Element der Queue und gibt dessen Inhalt zurück.
   - `head()`: Gibt den Inhalt des ersten Elements zurück, ohne es zu entfernen.
   - `drawQueue(PApplet sketch)`: Visualisierung der Queue.
+ 
+### 5. BinTreeGUI
+
+**Datei:** `BinTreeGUI.java`
+
+- **Beschreibung:** Implementiert eine grafische Benutzeroberfläche (GUI) für die Interaktion mit einem Binärbaum. Es verwendet Processing für die grafische Darstellung und Swing für Dialogfenster zur Benutzereingabe.
+- **Wichtige Funktionen:**
+  - `Hinzufügen von Knoten:` Über einen Dialog kann der Benutzer den Inhalt eines neuen Knotens eingeben, der dann dem Baum hinzugefügt wird.
+  - `Zurücksetzen des Baums:` Der Baum kann per Knopfdruck zurückgesetzt werden.
+  - `Visuelle Darstellung:` Der Binärbaum wird mit Linien und Ellipsen gezeichnet, wobei der Inhalt der Knoten in den Ellipsen angezeigt wird.
+  - `Interaktive Buttons:` "Add Node" und "Reset Tree" Buttons ermöglichen die Interaktion mit dem Baum.
+
+## Klassen
+
+*   **`BinTreeGUI`:** Die Hauptklasse, die die GUI implementiert und die Baumdarstellung sowie die Benutzerinteraktion verwaltet.
+*   **`Button` (innere Klasse):** Eine Hilfsklasse zur Erstellung und Verwaltung von Buttons innerhalb der GUI.
 
 ## Abhängigkeiten
-- **Processing Library:** Alle Klassen nutzen Processing zur Visualisierung der Datenstrukturen. Stellen Sie sicher, dass die Processing-Bibliothek in Ihrem Projekt eingebunden ist.
-
-## Verwendung
-1. **Kompilieren:** Stellen Sie sicher, dass alle Java-Dateien im gleichen Verzeichnis liegen und korrekt kompiliert werden.
-2. **Ausführen:** Die Klassen können eigenständig oder als Teil eines größeren Projekts verwendet werden.
-3. **Visualisierung:** Die Visualisierungsfunktionen (`drawBinTree`, `drawDynArray`, `drawStack`, `drawQueue`) erfordern ein `PApplet`-Objekt und können in einem Processing-Sketch aufgerufen werden.
+- **Processing Library:** Alle Klassen nutzen Processing zur Visualisierung der Datenstrukturen.
+- **Swing:** Wird für Dialogfenster in der Klasse BinTreeGUI benötigt.
 
 ## Autoren
 unbekannt
-Hendrik Bodenstein, 2024
+Hendrik Bodenstein, 2025
 
 ## Lizenz
 Dieses Projekt ist unter einer offenen Lizenz für Bildungszwecke freigegeben. Änderungen und Weiterverwendung sind gestattet, solange die ursprüngliche Quelle genannt wird.
