@@ -9,20 +9,20 @@ public class Queue<T> {
 	 * Die Implementierung nutzt zur Verwaltung der Inhaltsklasse der Schlange
 	 * generische Datentypen. Das bedeutet, dass bei der Deklaration einer Schlange
 	 * die zu verwendende Inhaltsklasse mit angegeben werden muss. Die interne
-	 * Verwaltung des Inhalts der Schlange erfolgt ï¿½ber eine interne Klasse Item.
+	 * Verwaltung des Inhalts der Schlange erfolgt über eine interne Klasse Item.
 	 * 
-	 * Die Funktionalitï¿½t und die Bezeichnungen der Schlange entsprechen den
-	 * Vorgaben der Thematischen Schwerpunkte fï¿½r die schriftliche Abiturprï¿½fung
+	 * Die Funktionalität und die Bezeichnungen der Schlange entsprechen den
+	 * Vorgaben der Thematischen Schwerpunkte für die schriftliche Abiturprüfung
 	 * 2018 in Informatik in Niedersachsen. Das bedeutet auch, dass in der
 	 * Implementierung keine "Absicherungen" enthalten sind, die z. B. das Entnehmen
 	 * bei einer leeren Schlange verhindern.
 	 *
-	 * Alternativ lieï¿½e sich auch eine spezielle Klasse Schlange implementieren, die
+	 * Alternativ ließe sich auch eine spezielle Klasse Schlange implementieren, die
 	 * die konkrete Inhaltsklasse der bearbeiteten Aufgabenstellung verwendet. Dazu
-	 * mï¿½sste aber fï¿½r jede Aufgabe ggf. eine neue Klasse Schlange erzeugt werden.
+	 * müsste aber für jede Aufgabe ggf. eine neue Klasse Schlange erzeugt werden.
 	 * Nutzt man als Inhaltsklasse die sehr allgemeine Java-Klasse Object, so ist
-	 * diese zwar universell nutzbar, man benï¿½tigt beim Zugriff auf die Schlange
-	 * dann aber hï¿½ufig Typecasting.
+	 * diese zwar universell nutzbar, man benötigt beim Zugriff auf die Schlange
+	 * dann aber häufig Typecasting.
 	 * 
 	 * Update: Hendrik Bodenstein, 17.12.2024
 	 */
@@ -37,7 +37,7 @@ public class Queue<T> {
 	}
 
 	/*
-	 * Wenn die Schlange kein Element besitzt, wird der Wert wahr zurï¿½ckgegeben,
+	 * Wenn die Schlange kein Element besitzt, wird der Wert wahr zurückgegeben,
 	 * sonst der Wert falsch.
 	 */
 	public boolean isEmpty() {
@@ -50,7 +50,7 @@ public class Queue<T> {
 	}
 
 	/*
-	 * Der Inhalt des ersten Element der Schlange wird zurï¿½ckgegeben, das Element
+	 * Der Inhalt des ersten Element der Schlange wird zurückgegeben, das Element
 	 * aber nicht aus der Schlange entfernt.
 	 */
 	public T head() {
@@ -58,7 +58,7 @@ public class Queue<T> {
 	}
 
 	/*
-	 * Der Inhalt des ersten Elements der Schlange wird zurï¿½ckgegeben und das
+	 * Der Inhalt des ersten Elements der Schlange wird zurückgegeben und das
 	 * Element dabei aus der Schlange entfernt.
 	 */
 	public T dequeue() {
@@ -68,8 +68,8 @@ public class Queue<T> {
 	}
 
 	/*
-	 * Ein neues Element mit dem ï¿½bergebenen Inhalt wird am Ende der Schlange
-	 * angehï¿½ngt.
+	 * Ein neues Element mit dem übergebenen Inhalt wird am Ende der Schlange
+	 * angehängt.
 	 */
 	public void enqueue(T d) {
 		Item i = new Item(d);
@@ -97,7 +97,7 @@ public class Queue<T> {
 		if (!isEmpty()) {
 			int groesse = 0;
 
-			// Lï¿½nge der Schlange bestimmen
+			// Länge der Schlange bestimmen
 			Item aktuell = head;
 			while (aktuell != null) {
 				groesse++;
@@ -113,10 +113,10 @@ public class Queue<T> {
 
 			for (int i = 1; i < groesse; i++) {
 				sketch.strokeWeight(1);
-				sketch.fill(255); // Weiï¿½e Fï¿½llung fï¿½r die Elemente
+				sketch.fill(255); // Weiße Füllung für die Elemente
 				sketch.stroke(0); // Schwarzer Rahmen
 
-				// Rechteck fï¿½r das aktuelle Element
+				// Rechteck für das aktuelle Element
 				sketch.rect(i * itemWidth + offsetX, y - itemWidth / 2, itemWidth, itemWidth);
 
 				// Text in der Mitte des Rechtecks
@@ -130,7 +130,7 @@ public class Queue<T> {
 			// Zeichnen des head
 			sketch.strokeWeight(3);
 			sketch.fill(255);
-			sketch.stroke(255, 255, 0); // Gelber Rahmen fï¿½r head
+			sketch.stroke(255, 255, 0); // Gelber Rahmen für head
 			sketch.rect(offsetX, y - itemWidth / 2, itemWidth, itemWidth);
 			
 			// Text in der Mitte des Rechtecks

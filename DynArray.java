@@ -9,21 +9,21 @@ public class DynArray<Variablentyp> {
 	 * Die Implementierung nutzt zur Verwaltung der Inhaltsklasse der dynamischen
 	 * Reihung generische Datentypen. Das bedeutet, dass bei der Deklaration einer
 	 * dynamischen Reihung die zu verwendende Inhaltsklasse mit angegeben werden
-	 * muss. Die interne Verwaltung des Inhalts der dynamischen Reihung erfolgt ï¿½ber
+	 * muss. Die interne Verwaltung des Inhalts der dynamischen Reihung erfolgt über
 	 * eine interne Klasse Element.
 	 * 
-	 * Die Funktionalitï¿½t und die Bezeichnungen der dynamischen Reihung entsprechen
-	 * den Vorgaben der Thematischen Schwerpunkte fï¿½r die schriftliche Abiturprï¿½fung
+	 * Die Funktionalität und die Bezeichnungen der dynamischen Reihung entsprechen
+	 * den Vorgaben der Thematischen Schwerpunkte für die schriftliche Abiturprüfung
 	 * 2018 in Informatik in Niedersachsen. Das bedeutet auch, dass in der
 	 * Implementierung keine "Absicherungen" enthalten sind, die z. B. das Entnehmen
 	 * bei einer leeren dynamischen Reihung verhindern.
 	 *
-	 * Alternativ lieï¿½e sich auch eine spezielle Klasse Dynamische Reihung
+	 * Alternativ ließe sich auch eine spezielle Klasse Dynamische Reihung
 	 * implementieren, die die konkrete Inhaltsklasse der bearbeiteten
-	 * Aufgabenstellung verwendet. Dazu mï¿½sste aber fï¿½r jede Aufgabe ggf. eine neue
+	 * Aufgabenstellung verwendet. Dazu müsste aber für jede Aufgabe ggf. eine neue
 	 * Klasse Dynamische Reihung erzeugt werden. Nutzt man als Inhaltsklasse die
 	 * sehr allgemeine Java-Klasse Object, so ist diese zwar universell nutzbar, man
-	 * benï¿½tigt beim Zugriff auf die dynamische Reihung dann aber hï¿½ufig
+	 * benötigt beim Zugriff auf die dynamische Reihung dann aber häufig
 	 * Typecasting.
 	 * 
 	 * Update: Hendrik Bodenstein, 16.12.2024
@@ -72,18 +72,18 @@ public class DynArray<Variablentyp> {
 	}
 
 	public void insertAt(int index, Variablentyp inhalt) {
-		if (index > 0 && index < laenge) { // Es wird "mittig" eingefï¿½gt
+		if (index > 0 && index < laenge) { // Es wird "mittig" eingefügt
 			Element neu = new Element(inhalt);
 			Element temp = getElement(index);
 			getElement(index - 1).naechstes = neu;
 			neu.naechstes = temp;
 			laenge++;
-		} else if (index == 0) { // Es wird vorne eingefï¿½gt
+		} else if (index == 0) { // Es wird vorne eingefügt
 			Element temp = kopf;
 			kopf = new Element(inhalt);
 			kopf.naechstes = temp;
 			laenge++;
-		} else if (index == laenge) { // Es wird am Ende hinzugefï¿½gt
+		} else if (index == laenge) { // Es wird am Ende hinzugefügt
 			append1(inhalt);
 		}
 	}
@@ -96,20 +96,20 @@ public class DynArray<Variablentyp> {
 	}
 
 	public void delete(int index) {
-		if (index > 0 && index < laenge) { // Es wird "mittig" gelï¿½scht
+		if (index > 0 && index < laenge) { // Es wird "mittig" gelöscht
 			getElement(index - 1).naechstes = getElement(index - 1).naechstes.naechstes;
 			laenge--;
-		} else if (index == laenge - 1) { // Es wird das letzte Element gelï¿½scht
+		} else if (index == laenge - 1) { // Es wird das letzte Element gelöscht
 			getElement(index - 1).naechstes = null;
 			laenge--;
-		} else if (index == 0) { // Es wird das erste Element gelï¿½scht
+		} else if (index == 0) { // Es wird das erste Element gelöscht
 			kopf = kopf.naechstes;
 			laenge--;
 		}
 	}
 
 	// Interne Hilfsoperation zum vereinfachten Zugriff auf die Elemente der Reihung
-	// durch die ï¿½ffentlichen Operationen
+	// durch die öffentlichen Operationen
 	private Element getElement(int index) {
 		if (laenge >= index) {
 			Element aktuell = kopf;
