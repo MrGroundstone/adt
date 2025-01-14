@@ -1,6 +1,7 @@
 # README
 
 Dieses Projekt implementiert vier grundlegende Datenstrukturen: einen Binärbaum, ein dynamisches Array einen Stack und eine Queue. Jede dieser Strukturen ist in einer separaten Klasse implementiert und bietet spezifische Methoden für die Manipulation und Visualisierung der jeweiligen Datenstruktur. Die Implementierungen orientieren sich an den Vorgaben für die Informatik-Abiturprüfung in Niedersachsen und sind für Bildungszwecke optimiert.
+Zusätzlich sind in allen vier Datenstrukturen Möglichkeiten für die Visualisierung in Processing eingefügt.
 
 ## Klassenübersicht
 
