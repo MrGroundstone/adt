@@ -61,11 +61,6 @@ Dieses Projekt implementiert vier grundlegende Datenstrukturen: einen Binärbaum
   - `Visuelle Darstellung:` Der Binärbaum wird mit Linien und Ellipsen gezeichnet, wobei der Inhalt der Knoten in den Ellipsen angezeigt wird.
   - `Interaktive Buttons:` "Add Node" und "Reset Tree" Buttons ermöglichen die Interaktion mit dem Baum.
 
-## Klassen
-
-*   **`BinTreeGUI`:** Die Hauptklasse, die die GUI implementiert und die Baumdarstellung sowie die Benutzerinteraktion verwaltet.
-*   **`Button` (innere Klasse):** Eine Hilfsklasse zur Erstellung und Verwaltung von Buttons innerhalb der GUI.
-
 ## Abhängigkeiten
 - **Processing Library:** Alle Klassen nutzen Processing zur Visualisierung der Datenstrukturen.
 - **Swing:** Wird für Dialogfenster in der Klasse BinTreeGUI benötigt.
