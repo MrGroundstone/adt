@@ -23,161 +23,136 @@ import processing.core.PApplet;
  * diese zwar universell nutzbar, man benötigt beim Zugriff auf die Schlange
  * dann aber häufig Typecasting.
  * <p>
- * Update: Hendrik Bodenstein, 17.12.2024
  *
  * @param <T> Der Datentyp der in der Schlange gespeicherten Elemente.
+ * 
+ * @author Hendrik Bodenstein (basierend auf Originalcode)
+ * @author Gemini (Überarbeitungen und Verbesserungen)
+ * @author ChatGPT (Überarbeitungen und Verbesserungen)
+ * @version 1.1
  */
 public class Queue<T> {
-    /**
-     * Zur Verwaltung des ersten Elements der Schlange.
-     */
-    private Item head;
-    /**
-     * Zur Verwaltung des letzten Elements der Schlange.
-     */
-    private Item back;
+	/**
+	 * Zur Verwaltung des ersten Elements der Schlange.
+	 */
+	Item head;
+	/**
+	 * Zur Verwaltung des letzten Elements der Schlange.
+	 */
+	private Item back;
 
-    /**
-     * Eine leere Schlange wird angelegt.
-     */
-    public Queue() {
-        head = null;
-        back = null;
-    }
+	private int size;
 
-    /**
-     * Überprüft, ob die Schlange leer ist.
-     *
-     * @return {@code true}, wenn die Schlange leer ist, {@code false} sonst.
-     */
-    public boolean isEmpty() {
-        return head == null;
-    }
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private GUI gui = new GUI(this);
 
-    /**
-     * Gibt den Inhalt des ersten Elements der Schlange zurück, ohne es zu entfernen.
-     *
-     * @return Der Inhalt des ersten Elements.
-     */
-    public T head() {
-        return head.data;
-    }
+	/**
+	 * Eine leere Schlange wird angelegt.
+	 */
+	public Queue() {
+		head = null;
+		back = null;
+		size = 0;
+	}
 
-    /**
-     * Gibt den Inhalt des ersten Elements der Schlange zurück und entfernt es.
-     *
-     * @return Der Inhalt des entfernten Elements.
-     */
-    public T dequeue() {
-        T temp = head.data;
-        head = head.next;
-        return temp;
-    }
+	/**
+	 * Überprüft, ob die Schlange leer ist.
+	 *
+	 * @return {@code true}, wenn die Schlange leer ist, {@code false} sonst.
+	 */
+	public boolean isEmpty() {
+		return head == null;
+	}
 
-    /**
-     * Fügt ein neues Element mit dem übergebenen Inhalt am Ende der Schlange hinzu.
-     *
-     * @param d Der Inhalt des neuen Elements.
-     */
-    public void enqueue(T d) {
-        Item i = new Item(d);
-        if (!isEmpty()) {
-            back.next = i;
-        } else {
-            head = i;
-        }
-        back = i;
-    }
+	/**
+	 * Gibt den Inhalt des ersten Elements der Schlange zurück, ohne es zu
+	 * entfernen.
+	 *
+	 * @return Der Inhalt des ersten Elements.
+	 */
+	public T head() {
+		return head.data;
+	}
 
-    /**
-     * Visualisierung einer Schlange in Processing.
-     *
-     * @param sketch Das PApplet-Objekt für die Darstellung.
-     */
-    public void drawQueue(PApplet sketch) {
-        drawQueue(sketch, sketch.height / 2);
-    }
+	/**
+	 * Gibt den Inhalt des ersten Elements der Schlange zurück und entfernt es.
+	 *
+	 * @return Der Inhalt des entfernten Elements.
+	 */
+	public T dequeue() {
+		T temp = head.data;
+		head = head.next;
+		size--;
+		return temp;
+	}
 
-    /**
-     * Visualisierung einer Schlange in Processing mit angegebenen y-Wert.
-     *
-     * @param sketch Das PApplet-Objekt für die Darstellung.
-     * @param y      Der y-Wert für die vertikale Position der Schlange.
-     */
-    @SuppressWarnings({"static-access"})
-    public void drawQueue(PApplet sketch, float y) {
-        if (!isEmpty()) {
-            int groesse = 0;
+	/**
+	 * Fügt ein neues Element mit dem übergebenen Inhalt am Ende der Schlange hinzu.
+	 *
+	 * @param d Der Inhalt des neuen Elements.
+	 */
+	public void enqueue(T d) {
+		Item i = new Item(d);
+		if (!isEmpty()) {
+			back.next = i;
+		} else {
+			head = i;
+		}
+		size++;
+		back = i;
+	}
 
-            // Länge der Schlange bestimmen
-            Item aktuell = head;
-            while (aktuell != null) {
-                groesse++;
-                aktuell = aktuell.next;
-            }
+	/**
+	 * Gibt die Länge der Schlange zurück. Wird für Visualisierung in Processing
+	 * benötigt.
+	 *
+	 * @return Die Länge der Schlange.
+	 */
+	int size() {
+		return size;
+	}
 
-            // Zeichnen der Schlange
-            float textSizeFactor = 0.4f;
-            float itemWidth = (sketch.width - sketch.width / 50) / groesse;
-            float offsetX = sketch.width / 100;
-            sketch.textSize(itemWidth * textSizeFactor);
-            aktuell = head.next;
+	/**
+	 * Visualisierung einer Schlange in Processing.
+	 *
+	 * @param sketch Das PApplet-Objekt für die Darstellung.
+	 */
+	public void drawQueue(PApplet sketch) {
+		gui.drawQueue(sketch);
+	}
 
-            for (int i = 1; i < groesse; i++) {
-                sketch.strokeWeight(1);
-                sketch.fill(255); // Weiße Füllung für die Elemente
-                sketch.stroke(0); // Schwarzer Rahmen
+	/**
+	 * Visualisierung einer Schlange in Processing an einer vorgegebenen Höhe.
+	 *
+	 * @param sketch Das PApplet-Objekt für die Darstellung.
+	 * @param y      Die vorgegebenen Höhe.
+	 */
+	public void drawQueue(PApplet sketch, float y) {
+		gui.drawQueue(sketch, y);
+	}
 
-                // Rechteck für das aktuelle Element
-                sketch.rect(i * itemWidth + offsetX, y - itemWidth / 2, itemWidth, itemWidth);
+	/**
+	 * Klasse Item zur internen Verwaltung der einzelnen Elemente der dynamischen
+	 * Reihung.
+	 */
+	class Item {
+		/**
+		 * Der Inhalt des Elements.
+		 */
+		public T data;
+		/**
+		 * Verweis auf das nachfolgende Element.
+		 */
+		public Item next;
 
-                // Text in der Mitte des Rechtecks
-                sketch.fill(0); // Schwarzer Text
-                sketch.textAlign(sketch.CENTER, sketch.CENTER); // Zentrierung
-                sketch.text("" + aktuell.data, i * itemWidth + offsetX + itemWidth / 2, y);
-
-                aktuell = aktuell.next;
-            }
-
-            // Zeichnen des head
-            sketch.strokeWeight(3);
-            sketch.fill(255);
-            sketch.stroke(255, 255, 0); // Gelber Rahmen für head
-            sketch.rect(offsetX, y - itemWidth / 2, itemWidth, itemWidth);
-
-            // Text in der Mitte des Rechtecks
-            sketch.fill(0); // Schwarzer Text
-            sketch.textAlign(sketch.CENTER, sketch.CENTER); // Zentrierung
-            sketch.text("" + head.data, offsetX + itemWidth / 2, y);
-
-        } else {
-            System.out.println("Die Queue ist leer!");
-        }
-
-    }
-
-    /**
-     * Klasse Item zur internen Verwaltung der einzelnen Elemente der dynamischen
-     * Reihung.
-     */
-    private class Item {
-        /**
-         * Der Inhalt des Elements.
-         */
-        public T data;
-        /**
-         * Verweis auf das nachfolgende Element.
-         */
-        public Item next;
-
-        /**
-         * Erzeugt ein neues Item mit dem gegebenen Inhalt.
-         *
-         * @param d Der Inhalt des Items.
-         */
-        public Item(T d) {
-            data = d;
-            next = null;
-        }
-    }
+		/**
+		 * Erzeugt ein neues Item mit dem gegebenen Inhalt.
+		 *
+		 * @param d Der Inhalt des Items.
+		 */
+		public Item(T d) {
+			data = d;
+			next = null;
+		}
+	}
 }

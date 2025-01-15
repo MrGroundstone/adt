@@ -19,7 +19,10 @@ import processing.core.PApplet;
  * so ist diese zwar universell nutzbar, man benötigt beim Zugriff auf den
  * Binärbaum dann aber häufig Typecasting.
  *
- * Update: Hendrik Bodenstein 14.01.2025
+ * @author Hendrik Bodenstein (basierend auf Originalcode)
+ * @author Gemini (Überarbeitungen und Verbesserungen)
+ * @author ChatGPT (Überarbeitungen und Verbesserungen)
+ * @version 1.1
  */
 public class BinTree {
 

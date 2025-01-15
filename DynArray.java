@@ -24,22 +24,28 @@ import processing.core.PApplet;
  * sehr allgemeine Java-Klasse Object, so ist diese zwar universell nutzbar, man
  * benötigt beim Zugriff auf die dynamische Reihung dann aber häufig
  * Typecasting.
- * 
- * Update: Hendrik Bodenstein, 16.12.2024
  *
  * @param <Variablentyp> Der Typ der Elemente, die in der dynamischen Reihung gespeichert werden.
+ * 
+ * @author Hendrik Bodenstein (basierend auf Originalcode)
+ * @author Gemini (Überarbeitungen und Verbesserungen)
+ * @author ChatGPT (Überarbeitungen und Verbesserungen)
+ * @version 1.1
  */
 public class DynArray<Variablentyp> {
     // Anfang Attribute
     private int laenge;
     private Element kopf;
     // Ende Attribute
+    
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	private GUI gui = new GUI(this);
 
     /**
      * Konstruktor für ein leeres DynArray.
      */
     public DynArray() {
-        laenge = 0;
+        setLaenge(0);
         kopf = null;
     }
 
@@ -51,7 +57,7 @@ public class DynArray<Variablentyp> {
      * @return true, wenn das DynArray leer ist, sonst false.
      */
     public boolean isEmpty() {
-        if (laenge == 0)
+        if (getLaenge() == 0)
             return true;
         // else
         return false;
@@ -64,7 +70,7 @@ public class DynArray<Variablentyp> {
      * @return Das Element am angegebenen Index oder null, wenn der Index ungültig ist.
      */
     public Variablentyp getItem(int index) {
-        if (index >= 0 && index < laenge) {
+        if (index >= 0 && index < getLaenge()) {
             Element aktuell = kopf;
             for (int i = 0; i < index; i++) {
                 aktuell = aktuell.naechstes;
@@ -80,7 +86,7 @@ public class DynArray<Variablentyp> {
      * @return Die Anzahl der Elemente.
      */
     public int getLength() {
-        return laenge;
+        return getLaenge();
     }
 
     /**
@@ -90,11 +96,11 @@ public class DynArray<Variablentyp> {
      */
     public void append1(Variablentyp inhalt) {
         if (!isEmpty()) {
-            getElement(laenge).naechstes = new Element(inhalt);
+            getElement(getLaenge()).naechstes = new Element(inhalt);
         } else {
             kopf = new Element(inhalt);
         }
-        laenge++;
+        setLaenge(getLaenge() + 1);
     }
 
     /**
@@ -104,18 +110,18 @@ public class DynArray<Variablentyp> {
      * @param inhalt Der Inhalt des einzufügenden Elements.
      */
     public void insertAt(int index, Variablentyp inhalt) {
-        if (index > 0 && index < laenge) { // Es wird "mittig" eingefügt
+        if (index > 0 && index < getLaenge()) { // Es wird "mittig" eingefügt
             Element neu = new Element(inhalt);
             Element temp = getElement(index);
             getElement(index - 1).naechstes = neu;
             neu.naechstes = temp;
-            laenge++;
+            setLaenge(getLaenge() + 1);
         } else if (index == 0) { // Es wird vorne eingefügt
             Element temp = kopf;
             kopf = new Element(inhalt);
             kopf.naechstes = temp;
-            laenge++;
-        } else if (index == laenge) { // Es wird am Ende hinzugefügt
+            setLaenge(getLaenge() + 1);
+        } else if (index == getLaenge()) { // Es wird am Ende hinzugefügt
             append1(inhalt);
         }
     }
@@ -127,7 +133,7 @@ public class DynArray<Variablentyp> {
      * @param inhalt Der neue Inhalt des Elements.
      */
     public void setItem(int index, Variablentyp inhalt) {
-        if (index > 0 && index <= laenge) {
+        if (index > 0 && index <= getLaenge()) {
             Element temp = getElement(index);
             temp.inhalt = inhalt;
         }
@@ -139,15 +145,15 @@ public class DynArray<Variablentyp> {
      * @param index Der Index des zu löschenden Elements.
      */
     public void delete(int index) {
-        if (index > 0 && index < laenge) { // Es wird "mittig" gelöscht
+        if (index > 0 && index < getLaenge()) { // Es wird "mittig" gelöscht
             getElement(index - 1).naechstes = getElement(index - 1).naechstes.naechstes;
-            laenge--;
-        } else if (index == laenge - 1) { // Es wird das letzte Element gelöscht
+            setLaenge(getLaenge() - 1);
+        } else if (index == getLaenge() - 1) { // Es wird das letzte Element gelöscht
             getElement(index - 1).naechstes = null;
-            laenge--;
+            setLaenge(getLaenge() - 1);
         } else if (index == 0) { // Es wird das erste Element gelöscht
             kopf = kopf.naechstes;
-            laenge--;
+            setLaenge(getLaenge() - 1);
         }
     }
 
@@ -159,7 +165,7 @@ public class DynArray<Variablentyp> {
      * @return Das Element am angegebenen Index oder null, wenn der Index ungültig ist.
      */
     private Element getElement(int index) {
-        if (laenge >= index) {
+        if (getLaenge() >= index) {
             Element aktuell = kopf;
             for (int i = 1; i < index; i++) {
                 aktuell = aktuell.naechstes;
@@ -173,38 +179,31 @@ public class DynArray<Variablentyp> {
      * Visualisierung eines DynArray in Processing.
      * @param sketch Der PApplet, auf dem gezeichnet wird.
      */
-    public void drawDynArray(PApplet sketch) {
-        drawDynArray(sketch, sketch.height/2);
-    }
+   	public void drawDynArray(PApplet sketch) {
+   		gui.drawStack(sketch);
+   	}
+   	
+   	/**
+	 * Visualisierung eines DynArrays in Processing an einer vorgegebenen Höhe.
+	 *
+	 * @param sketch Das PApplet-Objekt für die Darstellung.
+	 * @param y Die vorgegebenen Höhe.
+	 */
+	public void drawDynArray(PApplet sketch, float y) {
+		gui.drawDynArray(sketch, y);
+	}
 
-    /**
-     * Visualisierung eines DynArray in Processing.
-     * @param sketch Der PApplet, auf dem gezeichnet wird.
-     * @param y Die y-Position der Darstellung.
-     */
-    @SuppressWarnings({ "static-access" })
-    public void drawDynArray(PApplet sketch, float y) {
-        if (laenge != 0) {
+    
 
-            float textSizeFactor = 0.4f;
-            float itemWidth = (sketch.width - sketch.width / 50) / laenge;
-            sketch.textSize(itemWidth * textSizeFactor);
-            for (int i = 0; i < laenge; i++) {
-                sketch.fill(255);
-                sketch.rect(i * itemWidth + sketch.width / 100, y - itemWidth / 2, itemWidth, itemWidth);
-                // Text in der Mitte der Zelle
-                sketch.fill(0);
-                sketch.textAlign(sketch.CENTER, sketch.CENTER); // Text zentrieren
-                sketch.text(getItem(i).toString(), i * itemWidth + sketch.width / 100 + itemWidth / 2, y);
-            }
-        } else {
-            System.out.println("Das DynArray ist leer!");
-        }
-    }
+    int getLaenge() {
+		return laenge;
+	}
 
-    // Ende Methoden
+	public void setLaenge(int laenge) {
+		this.laenge = laenge;
+	}
 
-    /**
+	/**
      * Klasse Element zur internen Verwaltung der einzelnen Elemente der
      * dynamischen Reihung.
      */

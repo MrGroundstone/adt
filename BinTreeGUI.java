@@ -12,8 +12,10 @@ import processing.core.PApplet;
  * verwendet Processing für die grafische Darstellung und Swing für
  * Dialogfenster.
  *
- * @author Hendrik Bodenstein
- * @version 1.0
+ * @author Hendrik Bodenstein (basierend auf Originalcode)
+ * @author Gemini (Überarbeitungen und Verbesserungen)
+ * @author ChatGPT (Überarbeitungen und Verbesserungen)
+ * @version 1.1
  */
 public class BinTreeGUI extends PApplet {
 
