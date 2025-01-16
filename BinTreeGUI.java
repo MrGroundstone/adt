@@ -7,14 +7,14 @@ import static javax.swing.JOptionPane.showMessageDialog;
 import processing.core.PApplet;
 
 /**
- * Die Klasse {@code BinTreeGUI} implementiert eine grafische Benutzeroberfläche
- * (GUI) für die Interaktion mit einem Binärbaum ({@code BinTreeP}). Sie
- * verwendet Processing für die grafische Darstellung und Swing für
+ * Die Klasse {@code BinTreeGUI} implementiert eine grafische Benutzeroberflche
+ * (GUI) fr die Interaktion mit einem Binrbaum ({@code BinTreeP}). Sie
+ * verwendet Processing fr die grafische Darstellung und Swing fr
  * Dialogfenster.
  *
  * @author Hendrik Bodenstein (basierend auf Originalcode)
- * @author Gemini (Überarbeitungen und Verbesserungen)
- * @author ChatGPT (Überarbeitungen und Verbesserungen)
+ * @author Gemini (berarbeitungen und Verbesserungen)
+ * @author ChatGPT (berarbeitungen und Verbesserungen)
  * @version 1.1
  */
 public class BinTreeGUI extends PApplet {
@@ -37,9 +37,9 @@ public class BinTreeGUI extends PApplet {
 	float translateX = 0, translateY = 0, scaleFactor = (float) 1.0;
 
 	/**
-	 * Konstruktor für die {@code BinTreeGUI}.
+	 * Konstruktor fr die {@code BinTreeGUI}.
 	 *
-	 * @param binTree Der zugehörige Binärbaum.
+	 * @param binTree Der zugehrige Binrbaum.
 	 */
 	public BinTreeGUI(BinTree binTree) {
 		this.binTree = binTree;
@@ -55,7 +55,7 @@ public class BinTreeGUI extends PApplet {
 	}
 
 	/**
-	 * Zeichnet den Binärbaum auf den gegebenen {@code PApplet} Sketch.
+	 * Zeichnet den Binrbaum auf den gegebenen {@code PApplet} Sketch.
 	 *
 	 * @param p Der {@code PApplet} Sketch, auf dem der Baum gezeichnet wird.
 	 */
@@ -84,8 +84,8 @@ public class BinTreeGUI extends PApplet {
 	}
 
 	/**
-	 * Behandelt den Klick auf den "Add Node" Button. Öffnet einen Dialog zur
-	 * Eingabe des Knoteninhalts und fügt den Knoten zum Baum hinzu.
+	 * Behandelt den Klick auf den "Add Node" Button. ffnet einen Dialog zur
+	 * Eingabe des Knoteninhalts und fgt den Knoten zum Baum hinzu.
 	 */
 	private void handleAddButtonClick() {
 		try {
@@ -103,13 +103,13 @@ public class BinTreeGUI extends PApplet {
 	}
 
 	/**
-	 * Behandelt den Klick auf den "Reset Tree" Button. Setzt den Baum zurück.
+	 * Behandelt den Klick auf den "Reset Tree" Button. Setzt den Baum zurck.
 	 */
 	private void handleResetButtonClick() {
 		try {
 			binTree.reset();
 		} catch (Exception e) {
-			showMessageDialog(null, "Fehler beim Zurücksetzen des Baums!", "Fehler", ERROR_MESSAGE);
+			showMessageDialog(null, "Fehler beim Zurcksetzen des Baums!", "Fehler", ERROR_MESSAGE);
 		}
 	}
 
@@ -156,7 +156,7 @@ public class BinTreeGUI extends PApplet {
 	}
 
 	/**
-	 * Innere Klasse zur Repräsentation eines Buttons.
+	 * Innere Klasse zur Reprsentation eines Buttons.
 	 */
 	protected class Button {
 		int x, y, w, h;
@@ -165,14 +165,14 @@ public class BinTreeGUI extends PApplet {
 		boolean clicked = false;
 
 		/**
-		 * Konstruktor für einen Button.
+		 * Konstruktor fr einen Button.
 		 *
 		 * @param x      Die x-Koordinate des Buttons.
 		 * @param y      Die y-Koordinate des Buttons.
 		 * @param w      Die Breite des Buttons.
-		 * @param h      Die Höhe des Buttons.
+		 * @param h      Die Hhe des Buttons.
 		 * @param label  Die Beschriftung des Buttons.
-		 * @param action Die auszuführende Aktion beim Klicken.
+		 * @param action Die auszufhrende Aktion beim Klicken.
 		 */
 		Button(int x, int y, int w, int h, String label, Runnable action) {
 			this.x = x;
@@ -199,9 +199,9 @@ public class BinTreeGUI extends PApplet {
 		}
 
 		/**
-		 * Überprüft, ob die Maus über dem Button ist.
+		 * berprft, ob die Maus ber dem Button ist.
 		 *
-		 * @return {@code true}, wenn die Maus über dem Button ist, sonst {@code false}.
+		 * @return {@code true}, wenn die Maus ber dem Button ist, sonst {@code false}.
 		 */
 		boolean isHovered() {
 			return sketch.mouseX > x && sketch.mouseX < x + w && sketch.mouseY > y && sketch.mouseY < y + h;
@@ -214,7 +214,7 @@ public class BinTreeGUI extends PApplet {
 			if (isHovered() && sketch.mousePressed && !clicked && sketch.focused) {
 				sketch.mousePressed = false;
 				clicked = true;
-				action.run(); // Führt die zugewiesene Methode aus
+				action.run(); // Fhrt die zugewiesene Methode aus
 			} else if (!sketch.mousePressed) {
 				clicked = false; // Reset nach dem Klick
 			}
