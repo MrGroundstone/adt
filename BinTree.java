@@ -2,26 +2,31 @@ package adt;
 
 import processing.core.PApplet;
 
+import java.util.*;
+
+import static processing.core.PApplet.print;
+import static processing.core.PApplet.println;
+
 /**
- * Implementierung der Klasse BinTree (Binärbaum). Die Implementierung lässt als
+ * Implementierung der Klasse BinTree (Binï¿½rbaum). Die Implementierung lï¿½sst als
  * Inhalte Zeichenketten und Ganzzahlen zu. Die interne Verwaltung des Inhalts
- * des Binärbaums erfolgt über eine interne Klasse Inhalt. Die Funktionalität
- * und die Bezeichnungen des Binärbaums entsprechen den Vorgaben der
- * Thematischen Schwerpunkte für die schriftliche Abiturprüfung 2018 in
+ * des Binï¿½rbaums erfolgt ï¿½ber eine interne Klasse Inhalt. Die Funktionalitï¿½t
+ * und die Bezeichnungen des Binï¿½rbaums entsprechen den Vorgaben der
+ * Thematischen Schwerpunkte fï¿½r die schriftliche Abiturprï¿½fung 2018 in
  * Informatik in Niedersachsen. Das bedeutet auch, dass in der Implementierung
  * keine "Absicherungen" enthalten sind, die z. B. das Entnehmen bei einem
- * leeren Binärbaum verhindern.
+ * leeren Binï¿½rbaum verhindern.
  *
- * Alternativ ließe sich auch eine spezielle Klasse Binärbaum implementieren,
+ * Alternativ lieï¿½e sich auch eine spezielle Klasse Binï¿½rbaum implementieren,
  * die die konkrete Inhaltsklasse der bearbeiteten Aufgabenstellung verwendet.
- * Dazu müsste aber für jede Aufgabe ggf. eine neue Klasse Binärbaum erzeugt
+ * Dazu mï¿½sste aber fï¿½r jede Aufgabe ggf. eine neue Klasse Binï¿½rbaum erzeugt
  * werden. Nutzt man als Inhaltsklasse die sehr allgemeine Java-Klasse Object,
- * so ist diese zwar universell nutzbar, man benötigt beim Zugriff auf den
- * Binärbaum dann aber häufig Typecasting.
+ * so ist diese zwar universell nutzbar, man benï¿½tigt beim Zugriff auf den
+ * Binï¿½rbaum dann aber hï¿½ufig Typecasting.
  *
  * @author Hendrik Bodenstein (basierend auf Originalcode)
- * @author Gemini (Überarbeitungen und Verbesserungen)
- * @author ChatGPT (Überarbeitungen und Verbesserungen)
+ * @author Gemini (ï¿½berarbeitungen und Verbesserungen)
+ * @author ChatGPT (ï¿½berarbeitungen und Verbesserungen)
  * @version 1.1
  */
 public class BinTree {
@@ -33,7 +38,7 @@ public class BinTree {
 	private BinTree rechts = null; // rechter Teilbaum
 
 	/**
-	 * Ein leerer Binärbaum wird angelegt.
+	 * Ein leerer Binï¿½rbaum wird angelegt.
 	 */
 	public BinTree() {
 		inh = new Inhalt();
@@ -42,17 +47,17 @@ public class BinTree {
 	}
 
 	/**
-	 * Ein Binärbaum mit dem übergebenen Inhalt wird angelegt.
-	 * 
-	 * @param i Der Inhalt für den neuen Binärbaum.
+	 * Ein Binï¿½rbaum mit dem ï¿½bergebenen Inhalt wird angelegt.
+	 *
+	 * @param i Der Inhalt fï¿½r den neuen Binï¿½rbaum.
 	 */
 	public BinTree(Inhalt i) {
 		inh = i;
 	}
 
 	/**
-	 * Ein Binärbaum mit der übergebenen Zeichenkette als Inhalt wird angelegt.
-	 * 
+	 * Ein Binï¿½rbaum mit der ï¿½bergebenen Zeichenkette als Inhalt wird angelegt.
+	 *
 	 * @param s Die Zeichenkette als Inhalt.
 	 */
 	public BinTree(String s) {
@@ -60,8 +65,8 @@ public class BinTree {
 	}
 
 	/**
-	 * Ein Binärbaum mit der übergebenen Ganzzahl als Inhalt wird angelegt.
-	 * 
+	 * Ein Binï¿½rbaum mit der ï¿½bergebenen Ganzzahl als Inhalt wird angelegt.
+	 *
 	 * @param z Die Ganzzahl als Inhalt.
 	 */
 	public BinTree(int z) {
@@ -71,6 +76,65 @@ public class BinTree {
 	/**
 	 * Der Baum wird zu einem Beispielbaum umgewandelt.
 	 */
+	public void traversiere(String input, String type) {
+		ArrayList<BinTree> nodesList = new ArrayList<>();
+		String rootName = input.split(" ")[0];
+
+		for (String segment : input.split(" ")) {
+			nodesList.add(new BinTree(segment));
+		}
+
+
+		// calculate nodes per level
+		List<Integer> nodesPerLevel = new ArrayList<>();
+		int level = 0;
+		int n = nodesList.size();
+		while (n > 0) {
+			int nodesAtCurrentLevel = Math.min((int) Math.pow(2, level), n);
+			nodesPerLevel.add(nodesAtCurrentLevel);
+			n -= nodesAtCurrentLevel;
+			level++;
+		}
+
+
+		// level Traversion
+		if (Objects.equals(type, "level")) {
+			// create root element
+			this.inh.setText(rootName);
+			nodesList.remove(0);
+
+			// current item to append
+			int pointer = nodesPerLevel.get(1);
+			// node the item is appendend to
+			int lastNode = 0;
+			for (int i = 1; i < nodesPerLevel.size(); i++ )  {
+				for (int j = 0; j < nodesPerLevel.get(i) ; j++ )  {
+					if (i == 1) {
+						if (j % 2 == 0) {
+							this.setLeft(nodesList.get(0));
+						}else {
+							this.setRight(nodesList.get(1));
+						}
+					}else{
+						BinTree current = nodesList.get(pointer);
+						if (j % 2 == 0) {
+							nodesList.get(lastNode).setLeft(current);
+						}else {
+							nodesList.get(lastNode).setRight(current);
+							lastNode++;
+						}
+						pointer++;
+					}
+
+				}
+			}
+
+		}
+
+	}
+
+
+
 	public void beispielBaumErstellen() {
 		// Einzelne Knoten
 		BinTree A = new BinTree("A");
@@ -93,8 +157,8 @@ public class BinTree {
 		D.setLeft(X);
 		Y.setRight(Z);
 		D.setRight(Y);
-		G.setRight(D);
 		this.setLeft(G); // Setze den linken Teilbaum
+		G.setRight(D);
 
 		// Rechter Teilbaum
 		T.setLeft(N);
@@ -103,6 +167,7 @@ public class BinTree {
 		S.setRight(M);
 		this.setRight(S); // Setze den rechten Teilbaum
 	}
+
 
 	/**
 	 * Der Baum wird zu einem Beispiel-Suchbaum umgewandelt.
@@ -135,8 +200,8 @@ public class BinTree {
 
 	/**
 	 * Wenn die Wurzel des Baumes keinen Inhalt besitzt, wird der Wert wahr
-	 * zurückgegeben, sonst der Wert falsch.
-	 * 
+	 * zurï¿½ckgegeben, sonst der Wert falsch.
+	 *
 	 * @return true, wenn die Wurzel leer ist, sonst false.
 	 */
 	public boolean hasItem() {
@@ -147,8 +212,8 @@ public class BinTree {
 	}
 
 	/**
-	 * Der Inhalt der Wurzel des Baumes wird zurückgegeben.
-	 * 
+	 * Der Inhalt der Wurzel des Baumes wird zurï¿½ckgegeben.
+	 *
 	 * @return Der Inhalt der Wurzel.
 	 */
 	public Inhalt getItem() {
@@ -156,16 +221,16 @@ public class BinTree {
 	}
 
 	/**
-	 * Der Inhalt der Wurzel des Baumes wird auf den übergebenen Inhalt gesetzt.
-	 * 
-	 * @param inhalt Der neue Inhalt für die Wurzel.
+	 * Der Inhalt der Wurzel des Baumes wird auf den ï¿½bergebenen Inhalt gesetzt.
+	 *
+	 * @param inhalt Der neue Inhalt fï¿½r die Wurzel.
 	 */
 	public void setItem(Inhalt inhalt) {
 		inh = inhalt;
 	}
 
 	/**
-	 * Der Inhalt der Wurzel des Baumes wird gelöscht.
+	 * Der Inhalt der Wurzel des Baumes wird gelï¿½scht.
 	 */
 	public void deleteItem() {
 		inh = new Inhalt();
@@ -173,8 +238,8 @@ public class BinTree {
 
 	/**
 	 * Wenn es sich bei dem Baum um ein Blatt handelt, wird der Wert wahr
-	 * zurückgegeben, sonst der Wert falsch.
-	 * 
+	 * zurï¿½ckgegeben, sonst der Wert falsch.
+	 *
 	 * @return true, wenn der Baum ein Blatt ist, sonst false.
 	 */
 	public boolean isLeaf() {
@@ -186,8 +251,8 @@ public class BinTree {
 
 	/**
 	 * Wenn der Baum einen linken Teilbaum besitzt, wird der Wert wahr
-	 * zurückgegeben, sonst der Wert falsch.
-	 * 
+	 * zurï¿½ckgegeben, sonst der Wert falsch.
+	 *
 	 * @return true, wenn ein linker Teilbaum existiert, sonst false.
 	 */
 	public Boolean hasLeft() {
@@ -195,8 +260,8 @@ public class BinTree {
 	}
 
 	/**
-	 * Der linke Teilbaum des Baumes wird zurückgegeben.
-	 * 
+	 * Der linke Teilbaum des Baumes wird zurï¿½ckgegeben.
+	 *
 	 * @return Der linke Teilbaum.
 	 */
 	public BinTree getLeft() {
@@ -204,8 +269,8 @@ public class BinTree {
 	}
 
 	/**
-	 * Der linke Teilbaum des Baumes wird auf den übergebenen Baum gesetzt.
-	 * 
+	 * Der linke Teilbaum des Baumes wird auf den ï¿½bergebenen Baum gesetzt.
+	 *
 	 * @param b Der neue linke Teilbaum.
 	 */
 	public void setLeft(BinTree b) {
@@ -213,7 +278,7 @@ public class BinTree {
 	}
 
 	/**
-	 * Der linke Teilbaum des Baumes wird gelöscht.
+	 * Der linke Teilbaum des Baumes wird gelï¿½scht.
 	 */
 	public void deleteLeft() {
 		links = null;
@@ -221,8 +286,8 @@ public class BinTree {
 
 	/**
 	 * Wenn der Baum einen rechten Teilbaum besitzt, wird der Wert wahr
-	 * zurückgegeben, sonst der Wert falsch.
-	 * 
+	 * zurï¿½ckgegeben, sonst der Wert falsch.
+	 *
 	 * @return true, wenn ein rechter Teilbaum existiert, sonst false.
 	 */
 	public Boolean hasRight() {
@@ -230,8 +295,8 @@ public class BinTree {
 	}
 
 	/**
-	 * Der rechte Teilbaum des Baumes wird zurückgegeben.
-	 * 
+	 * Der rechte Teilbaum des Baumes wird zurï¿½ckgegeben.
+	 *
 	 * @return Der rechte Teilbaum.
 	 */
 	public BinTree getRight() {
@@ -239,8 +304,8 @@ public class BinTree {
 	}
 
 	/**
-	 * Der rechte Teilbaum des Baumes wird auf den übergebenen Baum gesetzt.
-	 * 
+	 * Der rechte Teilbaum des Baumes wird auf den ï¿½bergebenen Baum gesetzt.
+	 *
 	 * @param b Der neue rechte Teilbaum.
 	 */
 	public void setRight(BinTree b) {
@@ -248,24 +313,24 @@ public class BinTree {
 	}
 
 	/**
-	 * Der rechte Teilbaum des Baumes wird gelöscht.
+	 * Der rechte Teilbaum des Baumes wird gelï¿½scht.
 	 */
 	public void deleteRight() {
 		rechts = null;
 	}
 
 	/**
-	 * Visualisierung eines Binärbaums in Processing - Wrapper-Methode
-	 * 
-	 * @param sketch Das PApplet-Objekt für die Visualisierung.
+	 * Visualisierung eines Binï¿½rbaums in Processing - Wrapper-Methode
+	 *
+	 * @param sketch Das PApplet-Objekt fï¿½r die Visualisierung.
 	 */
 	public void drawBinTree(PApplet sketch) {
 		gui.drawBinTree(sketch);
 	}
 
 	/**
-	 * Methode zur Bestimmung der Tiefe, die für das Zeichnen benötigt wird.
-	 * 
+	 * Methode zur Bestimmung der Tiefe, die fï¿½r das Zeichnen benï¿½tigt wird.
+	 *
 	 * @return Die Tiefe des Baumes.
 	 */
 	int getTiefe() {
@@ -278,8 +343,8 @@ public class BinTree {
 	}
 
 	/**
-	 * Fügt einen Knoten zum Baum hinzu (zufällige Verteilung).
-	 * 
+	 * Fï¿½gt einen Knoten zum Baum hinzu (zufï¿½llige Verteilung).
+	 *
 	 * @param value Der Wert des neuen Knotens (Integer).
 	 */
 	void addNodeToTree(int value) {
@@ -299,8 +364,8 @@ public class BinTree {
 	}
 
 	/**
-	 * Fügt einen Knoten zum Baum hinzu (zufällige Verteilung).
-	 * 
+	 * Fï¿½gt einen Knoten zum Baum hinzu (zufï¿½llige Verteilung).
+	 *
 	 * @param value Der Wert des neuen Knotens (String).
 	 */
 	void addNodeToTree(String value) {
@@ -321,7 +386,7 @@ public class BinTree {
 	}
 
 	/**
-	 * Setzt den Baum zurück.
+	 * Setzt den Baum zurï¿½ck.
 	 */
 	void reset() {
 		this.inh = new Inhalt();
@@ -330,7 +395,7 @@ public class BinTree {
 	}
 
 	/**
-	 * Klasse Inhalt zur internen Verwaltung der einzelnen Elemente des Binärbaums.
+	 * Klasse Inhalt zur internen Verwaltung der einzelnen Elemente des Binï¿½rbaums.
 	 */
 	protected class Inhalt {
 		private int zahl = -1;
@@ -345,8 +410,8 @@ public class BinTree {
 		}
 
 		/**
-		 * Die Ganzzahl des Inhalts wird auf die übergebene Zahl gesetzt.
-		 * 
+		 * Die Ganzzahl des Inhalts wird auf die ï¿½bergebene Zahl gesetzt.
+		 *
 		 * @param z Die neue Ganzzahl.
 		 */
 		public void setZahl(int z) {
@@ -354,8 +419,8 @@ public class BinTree {
 		}
 
 		/**
-		 * Die Zeichenkette des Inhalts wird auf die übergebene Zeichenkette gesetzt.
-		 * 
+		 * Die Zeichenkette des Inhalts wird auf die ï¿½bergebene Zeichenkette gesetzt.
+		 *
 		 * @param s Die neue Zeichenkette.
 		 */
 		public void setText(String s) {
@@ -363,8 +428,8 @@ public class BinTree {
 		}
 
 		/**
-		 * Die Ganzzahl des Inhalts wird zurückgegeben.
-		 * 
+		 * Die Ganzzahl des Inhalts wird zurï¿½ckgegeben.
+		 *
 		 * @return Die Ganzzahl.
 		 */
 		public int getZahl() {
@@ -372,8 +437,8 @@ public class BinTree {
 		}
 
 		/**
-		 * Die Zeichenkette des Inhalts wird zurückgegeben.
-		 * 
+		 * Die Zeichenkette des Inhalts wird zurï¿½ckgegeben.
+		 *
 		 * @return Die Zeichenkette.
 		 */
 		public String getText() {
@@ -381,9 +446,9 @@ public class BinTree {
 		}
 
 		/**
-		 * Wenn der Inhalt leer ist, wird der Wert wahr zurückgegeben, sonst der Wert
+		 * Wenn der Inhalt leer ist, wird der Wert wahr zurï¿½ckgegeben, sonst der Wert
 		 * falsch.
-		 * 
+		 *
 		 * @return true, wenn der Inhalt leer ist, sonst false.
 		 */
 		public boolean istLeer() {

@@ -5,16 +5,16 @@ import java.util.List;
 import processing.core.PApplet;
 
 /**
- * Die Klasse {@code GUI} implementiert eine grafische Benutzeroberfläche (GUI)
- * für die Darstellung von {@link Stack}, {@link Queue} und {@link DynArray}.
- * Sie verwendet Processing für die grafische Darstellung.
+ * Die Klasse {@code GUI} implementiert eine grafische Benutzeroberflche (GUI)
+ * fr die Darstellung von {@link Stack}, {@link Queue} und {@link DynArray}.
+ * Sie verwendet Processing fr die grafische Darstellung.
  *
  * @param <T> Der Typ der Elemente, die in den Datenstrukturen gespeichert
  *            werden.
  * 
  * @author Hendrik Bodenstein (basierend auf Originalcode)
- * @author Gemini (Überarbeitungen und Verbesserungen)
- * @author ChatGPT (Überarbeitungen und Verbesserungen)
+ * @author Gemini (berarbeitungen und Verbesserungen)
+ * @author ChatGPT (berarbeitungen und Verbesserungen)
  * @version 1.1
  */
 public class GUI<T> extends PApplet {
@@ -30,7 +30,7 @@ public class GUI<T> extends PApplet {
 	private DynArray<T> dynArray;
 
 	/**
-	 * Konstruktor für die GUI mit einem Stack.
+	 * Konstruktor fr die GUI mit einem Stack.
 	 *
 	 * @param stack Der zu visualisierende Stack.
 	 */
@@ -39,7 +39,7 @@ public class GUI<T> extends PApplet {
 	}
 
 	/**
-	 * Konstruktor für die GUI mit einer Queue.
+	 * Konstruktor fr die GUI mit einer Queue.
 	 *
 	 * @param queue Die zu visualisierende Queue.
 	 */
@@ -48,7 +48,7 @@ public class GUI<T> extends PApplet {
 	}
 
 	/**
-	 * Konstruktor für die GUI mit einem DynArray.
+	 * Konstruktor fr die GUI mit einem DynArray.
 	 *
 	 * @param dynArray Das zu visualisierende DynArray.
 	 */
@@ -57,28 +57,28 @@ public class GUI<T> extends PApplet {
 	}
 
 	/**
-	 * Hilfsmethode, um die Elemente eines Stacks in einer Liste zurückzugeben, ohne
-	 * den Stack zu verändern.
+	 * Hilfsmethode, um die Elemente eines Stacks in einer Liste zurckzugeben, ohne
+	 * den Stack zu verndern.
 	 *
 	 * @param stack Der Stack, dessen Elemente abgerufen werden sollen.
 	 * @return Eine Liste mit den Elementen des Stacks.
 	 */
 	private List<T> getStackElements(Stack<T> stack) {
 		List<T> elements = new ArrayList<>();
-		Stack<T> tempStack = new Stack<>(); // Temporärer Stack
+		Stack<T> tempStack = new Stack<>(); // Temporrer Stack
 		while (!stack.isEmpty()) {
 			T element = stack.pop1();
 			elements.add(element);
-			tempStack.push1(element); // Elemente im temporären Stack zwischenspeichern
+			tempStack.push1(element); // Elemente im temporren Stack zwischenspeichern
 		}
 		while (!tempStack.isEmpty()) {
-			stack.push1(tempStack.pop1()); // Ursprünglichen Stack wiederherstellen
+			stack.push1(tempStack.pop1()); // Ursprnglichen Stack wiederherstellen
 		}
 		return elements;
 	}
 
 	/**
-	 * Zeichnet den Stack auf dem übergebenen PApplet.
+	 * Zeichnet den Stack auf dem bergebenen PApplet.
 	 *
 	 * @param p Der PApplet, auf dem gezeichnet wird.
 	 * @param x Die x-Koordinate des Stacks.
@@ -86,10 +86,10 @@ public class GUI<T> extends PApplet {
 	@SuppressWarnings("static-access")
 	public void drawStack(PApplet p, float x) {
 		if (stack == null)
-			return; // Überprüfung auf Null
+			return; // berprfung auf Null
 		if (stack.isEmpty()) {
 			p.text("Stack ist leer", x, p.height / 2);
-			return; // Frühes Verlassen der Methode
+			return; // Frhes Verlassen der Methode
 		}
 
 		List<T> elements = getStackElements(stack);
@@ -124,7 +124,7 @@ public class GUI<T> extends PApplet {
 	}
 
 	/**
-	 * Zeichnet das DynArray auf dem übergebenen PApplet.
+	 * Zeichnet das DynArray auf dem bergebenen PApplet.
 	 *
 	 * @param p Der PApplet, auf dem gezeichnet wird.
 	 * @param y Die y-Koordinate des DynArrays.
@@ -132,7 +132,7 @@ public class GUI<T> extends PApplet {
 	@SuppressWarnings("static-access")
 	public void drawDynArray(PApplet p, float y) {
 		if (dynArray == null)
-			return; // Überprüfung auf Null
+			return; // berprfung auf Null
 		if (dynArray.getLaenge() == 0) {
 			p.text("DynArray ist leer", p.width / 2, y);
 			return;
@@ -152,7 +152,7 @@ public class GUI<T> extends PApplet {
 	}
 
 	/**
-	 * Zeichnet die Queue auf dem übergebenen PApplet.
+	 * Zeichnet die Queue auf dem bergebenen PApplet.
 	 *
 	 * @param p Der PApplet, auf dem gezeichnet wird.
 	 * @param y Die y-Koordinate der Queue.
@@ -160,7 +160,7 @@ public class GUI<T> extends PApplet {
 	@SuppressWarnings({ "rawtypes", "static-access" })
 	public void drawQueue(PApplet p, float y) {
 		if (queue == null)
-			return; // Überprüfung auf Null
+			return; // berprfung auf Null
 		if (queue.isEmpty()) {
 			p.text("Queue ist leer", p.width / 2, y);
 			return;
