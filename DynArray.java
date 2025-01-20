@@ -8,31 +8,31 @@ import processing.core.PApplet;
  * Die Implementierung nutzt zur Verwaltung der Inhaltsklasse der dynamischen
  * Reihung generische Datentypen. Das bedeutet, dass bei der Deklaration einer
  * dynamischen Reihung die zu verwendende Inhaltsklasse mit angegeben werden
- * muss. Die interne Verwaltung des Inhalts der dynamischen Reihung erfolgt über
+ * muss. Die interne Verwaltung des Inhalts der dynamischen Reihung erfolgt Ã¼ber
  * eine interne Klasse Element.
  * 
- * Die Funktionalität und die Bezeichnungen der dynamischen Reihung entsprechen
- * den Vorgaben der Thematischen Schwerpunkte für die schriftliche Abiturprüfung
+ * Die FunktionalitÃ¤t und die Bezeichnungen der dynamischen Reihung entsprechen
+ * den Vorgaben der Thematischen Schwerpunkte fÃ¼r die schriftliche AbiturprÃ¼fung
  * 2018 in Informatik in Niedersachsen. Das bedeutet auch, dass in der
  * Implementierung keine "Absicherungen" enthalten sind, die z. B. das Entnehmen
  * bei einer leeren dynamischen Reihung verhindern.
  *
- * Alternativ ließe sich auch eine spezielle Klasse Dynamische Reihung
+ * Alternativ lieÃŸe sich auch eine spezielle Klasse Dynamische Reihung
  * implementieren, die die konkrete Inhaltsklasse der bearbeiteten
- * Aufgabenstellung verwendet. Dazu müsste aber für jede Aufgabe ggf. eine neue
+ * Aufgabenstellung verwendet. Dazu mÃ¼sste aber fÃ¼r jede Aufgabe ggf. eine neue
  * Klasse Dynamische Reihung erzeugt werden. Nutzt man als Inhaltsklasse die
  * sehr allgemeine Java-Klasse Object, so ist diese zwar universell nutzbar, man
- * benötigt beim Zugriff auf die dynamische Reihung dann aber häufig
+ * benÃ¶tigt beim Zugriff auf die dynamische Reihung dann aber hÃ¤ufig
  * Typecasting.
  *
- * @param <Variablentyp> Der Typ der Elemente, die in der dynamischen Reihung gespeichert werden.
+ * @param <T> Der Typ der Elemente, die in der dynamischen Reihung gespeichert werden.
  * 
  * @author Hendrik Bodenstein (basierend auf Originalcode)
- * @author Gemini (Überarbeitungen und Verbesserungen)
- * @author ChatGPT (Überarbeitungen und Verbesserungen)
+ * @author Gemini (Ãœberarbeitungen und Verbesserungen)
+ * @author ChatGPT (Ãœberarbeitungen und Verbesserungen)
  * @version 1.1
  */
-public class DynArray<Variablentyp> {
+public class DynArray<T> {
     // Anfang Attribute
     private int laenge;
     private Element kopf;
@@ -42,7 +42,7 @@ public class DynArray<Variablentyp> {
 	private GUI gui = new GUI(this);
 
     /**
-     * Konstruktor für ein leeres DynArray.
+     * Konstruktor fÃ¼r ein leeres DynArray.
      */
     public DynArray() {
         setLaenge(0);
@@ -52,7 +52,7 @@ public class DynArray<Variablentyp> {
     // Anfang Methoden
 
     /**
-     * Überprüft, ob das DynArray leer ist.
+     * ÃœberprÃ¼ft, ob das DynArray leer ist.
      *
      * @return true, wenn das DynArray leer ist, sonst false.
      */
@@ -64,12 +64,12 @@ public class DynArray<Variablentyp> {
     }
 
     /**
-     * Gibt das Element an einem bestimmten Index zurück.
+     * Gibt das Element an einem bestimmten Index zurÃ¼ck.
      *
      * @param index Der Index des Elements.
-     * @return Das Element am angegebenen Index oder null, wenn der Index ungültig ist.
+     * @return Das Element am angegebenen Index oder null, wenn der Index ungÃ¼ltig ist.
      */
-    public Variablentyp getItem(int index) {
+    public T getItem(int index) {
         if (index >= 0 && index < getLaenge()) {
             Element aktuell = kopf;
             for (int i = 0; i < index; i++) {
@@ -81,7 +81,7 @@ public class DynArray<Variablentyp> {
     }
 
     /**
-     * Gibt die Anzahl der Elemente im DynArray zurück.
+     * Gibt die Anzahl der Elemente im DynArray zurÃ¼ck.
      *
      * @return Die Anzahl der Elemente.
      */
@@ -90,11 +90,11 @@ public class DynArray<Variablentyp> {
     }
 
     /**
-     * Fügt ein Element am Ende des DynArrays hinzu.
+     * FÃ¼gt ein Element am Ende des DynArrays hinzu.
      *
-     * @param inhalt Der Inhalt des hinzuzufügenden Elements.
+     * @param inhalt Der Inhalt des hinzuzufÃ¼genden Elements.
      */
-    public void append1(Variablentyp inhalt) {
+    public void append1(T inhalt) {
         if (!isEmpty()) {
             getElement(getLaenge()).naechstes = new Element(inhalt);
         } else {
@@ -104,24 +104,24 @@ public class DynArray<Variablentyp> {
     }
 
     /**
-     * Fügt ein Element an einem bestimmten Index ein.
+     * FÃ¼gt ein Element an einem bestimmten Index ein.
      *
-     * @param index Der Index, an dem das Element eingefügt werden soll.
-     * @param inhalt Der Inhalt des einzufügenden Elements.
+     * @param index Der Index, an dem das Element eingefÃ¼gt werden soll.
+     * @param inhalt Der Inhalt des einzufÃ¼genden Elements.
      */
-    public void insertAt(int index, Variablentyp inhalt) {
-        if (index > 0 && index < getLaenge()) { // Es wird "mittig" eingefügt
+    public void insertAt(int index, T inhalt) {
+        if (index > 0 && index < getLaenge()) { // Es wird "mittig" eingefÃ¼gt
             Element neu = new Element(inhalt);
             Element temp = getElement(index);
             getElement(index - 1).naechstes = neu;
             neu.naechstes = temp;
             setLaenge(getLaenge() + 1);
-        } else if (index == 0) { // Es wird vorne eingefügt
+        } else if (index == 0) { // Es wird vorne eingefÃ¼gt
             Element temp = kopf;
             kopf = new Element(inhalt);
             kopf.naechstes = temp;
             setLaenge(getLaenge() + 1);
-        } else if (index == getLaenge()) { // Es wird am Ende hinzugefügt
+        } else if (index == getLaenge()) { // Es wird am Ende hinzugefÃ¼gt
             append1(inhalt);
         }
     }
@@ -132,7 +132,7 @@ public class DynArray<Variablentyp> {
      * @param index Der Index des zu setzenden Elements.
      * @param inhalt Der neue Inhalt des Elements.
      */
-    public void setItem(int index, Variablentyp inhalt) {
+    public void setItem(int index, T inhalt) {
         if (index > 0 && index <= getLaenge()) {
             Element temp = getElement(index);
             temp.inhalt = inhalt;
@@ -140,18 +140,18 @@ public class DynArray<Variablentyp> {
     }
 
     /**
-     * Löscht das Element an einem bestimmten Index.
+     * LÃ¶scht das Element an einem bestimmten Index.
      *
-     * @param index Der Index des zu löschenden Elements.
+     * @param index Der Index des zu lÃ¶schenden Elements.
      */
     public void delete(int index) {
-        if (index > 0 && index < getLaenge()) { // Es wird "mittig" gelöscht
+        if (index > 0 && index < getLaenge()) { // Es wird "mittig" gelÃ¶scht
             getElement(index - 1).naechstes = getElement(index - 1).naechstes.naechstes;
             setLaenge(getLaenge() - 1);
-        } else if (index == getLaenge() - 1) { // Es wird das letzte Element gelöscht
+        } else if (index == getLaenge() - 1) { // Es wird das letzte Element gelÃ¶scht
             getElement(index - 1).naechstes = null;
             setLaenge(getLaenge() - 1);
-        } else if (index == 0) { // Es wird das erste Element gelöscht
+        } else if (index == 0) { // Es wird das erste Element gelÃ¶scht
             kopf = kopf.naechstes;
             setLaenge(getLaenge() - 1);
         }
@@ -159,10 +159,10 @@ public class DynArray<Variablentyp> {
 
     /**
      * Interne Hilfsoperation zum vereinfachten Zugriff auf die Elemente der Reihung
-     * durch die öffentlichen Operationen.
+     * durch die Ã¶ffentlichen Operationen.
      *
-     * @param index Der Index des gewünschten Elements (beginnend bei 1).
-     * @return Das Element am angegebenen Index oder null, wenn der Index ungültig ist.
+     * @param index Der Index des gewÃ¼nschten Elements (beginnend bei 1).
+     * @return Das Element am angegebenen Index oder null, wenn der Index ungÃ¼ltig ist.
      */
     private Element getElement(int index) {
         if (getLaenge() >= index) {
@@ -179,31 +179,29 @@ public class DynArray<Variablentyp> {
      * Visualisierung eines DynArray in Processing.
      * @param sketch Der PApplet, auf dem gezeichnet wird.
      */
-   	public void drawDynArray(PApplet sketch) {
-   		gui.drawStack(sketch);
-   	}
-   	
-   	/**
-	 * Visualisierung eines DynArrays in Processing an einer vorgegebenen Höhe.
-	 *
-	 * @param sketch Das PApplet-Objekt für die Darstellung.
-	 * @param y Die vorgegebenen Höhe.
-	 */
-	public void drawDynArray(PApplet sketch, float y) {
-		gui.drawDynArray(sketch, y);
-	}
-
+    public void drawDynArray(PApplet sketch) {
+        gui.drawStack(sketch);
+    }
     
+    /**
+     * Visualisierung eines DynArrays in Processing an einer vorgegebenen HÃ¶he.
+     *
+     * @param sketch Das PApplet-Objekt fÃ¼r die Darstellung.
+     * @param y Die vorgegebene HÃ¶he.
+     */
+    public void drawDynArray(PApplet sketch, float y) {
+        gui.drawDynArray(sketch, y);
+    }
 
     int getLaenge() {
-		return laenge;
-	}
+        return laenge;
+    }
 
-	public void setLaenge(int laenge) {
-		this.laenge = laenge;
-	}
+    public void setLaenge(int laenge) {
+        this.laenge = laenge;
+    }
 
-	/**
+    /**
      * Klasse Element zur internen Verwaltung der einzelnen Elemente der
      * dynamischen Reihung.
      */
@@ -211,18 +209,18 @@ public class DynArray<Variablentyp> {
         /**
          * Der Inhalt des Elements.
          */
-        public Variablentyp inhalt;
+        public T inhalt;
         /**
-         * Das nächste Element in der Liste.
+         * Das nÃ¤chste Element in der Liste.
          */
         public Element naechstes;
 
         /**
-         * Konstruktor für ein Element.
+         * Konstruktor fÃ¼r ein Element.
          *
          * @param inh Der Inhalt des Elements.
          */
-        public Element(Variablentyp inh) {
+        public Element(T inh) {
             inhalt = inh;
             naechstes = null;
         }

@@ -3,25 +3,25 @@ package adt;
 import processing.core.PApplet;
 
 /**
- * Implementierung der Klasse BinTree (Binärbaum). Die Implementierung lässt als
+ * Implementierung der Klasse BinTree (BinÃ¤rbaum). Die Implementierung lÃ¤sst als
  * Inhalte Zeichenketten und Ganzzahlen zu. Die interne Verwaltung des Inhalts
- * des Binärbaums erfolgt über eine interne Klasse Inhalt. Die Funktionalität
- * und die Bezeichnungen des Binärbaums entsprechen den Vorgaben der
- * Thematischen Schwerpunkte für die schriftliche Abiturprüfung 2018 in
+ * des BinÃ¤rbaums erfolgt Ã¼ber eine interne Klasse Inhalt. Die FunktionalitÃ¤t
+ * und die Bezeichnungen des BinÃ¤rbaums entsprechen den Vorgaben der
+ * Thematischen Schwerpunkte fÃ¼r die schriftliche AbiturprÃ¼fung 2018 in
  * Informatik in Niedersachsen. Das bedeutet auch, dass in der Implementierung
  * keine "Absicherungen" enthalten sind, die z. B. das Entnehmen bei einem
- * leeren Binärbaum verhindern.
+ * leeren BinÃ¤rbaum verhindern.
  *
- * Alternativ ließe sich auch eine spezielle Klasse Binärbaum implementieren,
+ * Alternativ lieÃŸe sich auch eine spezielle Klasse BinÃ¤rbaum implementieren,
  * die die konkrete Inhaltsklasse der bearbeiteten Aufgabenstellung verwendet.
- * Dazu müsste aber für jede Aufgabe ggf. eine neue Klasse Binärbaum erzeugt
+ * Dazu mÃ¼sste aber fÃ¼r jede Aufgabe ggf. eine neue Klasse BinÃ¤rbaum erzeugt
  * werden. Nutzt man als Inhaltsklasse die sehr allgemeine Java-Klasse Object,
- * so ist diese zwar universell nutzbar, man benötigt beim Zugriff auf den
- * Binärbaum dann aber häufig Typecasting.
+ * so ist diese zwar universell nutzbar, man benÃ¶tigt beim Zugriff auf den
+ * BinÃ¤rbaum dann aber hÃ¤ufig Typecasting.
  *
  * @author Hendrik Bodenstein (basierend auf Originalcode)
- * @author Gemini (Überarbeitungen und Verbesserungen)
- * @author ChatGPT (Überarbeitungen und Verbesserungen)
+ * @author Gemini (Ãœberarbeitungen und Verbesserungen)
+ * @author ChatGPT (Ãœberarbeitungen und Verbesserungen)
  * @version 1.1
  */
 public class BinTree {
@@ -33,7 +33,7 @@ public class BinTree {
 	private BinTree rechts = null; // rechter Teilbaum
 
 	/**
-	 * Ein leerer Binärbaum wird angelegt.
+	 * Ein leerer BinÃ¤rbaum wird angelegt.
 	 */
 	public BinTree() {
 		inh = new Inhalt();
@@ -42,16 +42,16 @@ public class BinTree {
 	}
 
 	/**
-	 * Ein Binärbaum mit dem übergebenen Inhalt wird angelegt.
+	 * Ein BinÃ¤rbaum mit dem Ã¼bergebenen Inhalt wird angelegt.
 	 * 
-	 * @param i Der Inhalt für den neuen Binärbaum.
+	 * @param i Der Inhalt fÃ¼r den neuen BinÃ¤rbaum.
 	 */
 	public BinTree(Inhalt i) {
 		inh = i;
 	}
 
 	/**
-	 * Ein Binärbaum mit der übergebenen Zeichenkette als Inhalt wird angelegt.
+	 * Ein BinÃ¤rbaum mit der Ã¼bergebenen Zeichenkette als Inhalt wird angelegt.
 	 * 
 	 * @param s Die Zeichenkette als Inhalt.
 	 */
@@ -60,7 +60,7 @@ public class BinTree {
 	}
 
 	/**
-	 * Ein Binärbaum mit der übergebenen Ganzzahl als Inhalt wird angelegt.
+	 * Ein BinÃ¤rbaum mit der Ã¼bergebenen Ganzzahl als Inhalt wird angelegt.
 	 * 
 	 * @param z Die Ganzzahl als Inhalt.
 	 */
@@ -135,7 +135,7 @@ public class BinTree {
 
 	/**
 	 * Wenn die Wurzel des Baumes keinen Inhalt besitzt, wird der Wert wahr
-	 * zurückgegeben, sonst der Wert falsch.
+	 * zurÃ¼ckgegeben, sonst der Wert falsch.
 	 * 
 	 * @return true, wenn die Wurzel leer ist, sonst false.
 	 */
@@ -147,7 +147,7 @@ public class BinTree {
 	}
 
 	/**
-	 * Der Inhalt der Wurzel des Baumes wird zurückgegeben.
+	 * Der Inhalt der Wurzel des Baumes wird zurÃ¼ckgegeben.
 	 * 
 	 * @return Der Inhalt der Wurzel.
 	 */
@@ -156,16 +156,16 @@ public class BinTree {
 	}
 
 	/**
-	 * Der Inhalt der Wurzel des Baumes wird auf den übergebenen Inhalt gesetzt.
+	 * Der Inhalt der Wurzel des Baumes wird auf den Ã¼bergebenen Inhalt gesetzt.
 	 * 
-	 * @param inhalt Der neue Inhalt für die Wurzel.
+	 * @param inhalt Der neue Inhalt fÃ¼r die Wurzel.
 	 */
 	public void setItem(Inhalt inhalt) {
 		inh = inhalt;
 	}
 
 	/**
-	 * Der Inhalt der Wurzel des Baumes wird gelöscht.
+	 * Der Inhalt der Wurzel des Baumes wird gelÃ¶scht.
 	 */
 	public void deleteItem() {
 		inh = new Inhalt();
@@ -173,7 +173,7 @@ public class BinTree {
 
 	/**
 	 * Wenn es sich bei dem Baum um ein Blatt handelt, wird der Wert wahr
-	 * zurückgegeben, sonst der Wert falsch.
+	 * zurÃ¼ckgegeben, sonst der Wert falsch.
 	 * 
 	 * @return true, wenn der Baum ein Blatt ist, sonst false.
 	 */
@@ -186,7 +186,7 @@ public class BinTree {
 
 	/**
 	 * Wenn der Baum einen linken Teilbaum besitzt, wird der Wert wahr
-	 * zurückgegeben, sonst der Wert falsch.
+	 * zurÃ¼ckgegeben, sonst der Wert falsch.
 	 * 
 	 * @return true, wenn ein linker Teilbaum existiert, sonst false.
 	 */
@@ -195,7 +195,7 @@ public class BinTree {
 	}
 
 	/**
-	 * Der linke Teilbaum des Baumes wird zurückgegeben.
+	 * Der linke Teilbaum des Baumes wird zurÃ¼ckgegeben.
 	 * 
 	 * @return Der linke Teilbaum.
 	 */
@@ -204,7 +204,7 @@ public class BinTree {
 	}
 
 	/**
-	 * Der linke Teilbaum des Baumes wird auf den übergebenen Baum gesetzt.
+	 * Der linke Teilbaum des Baumes wird auf den Ã¼bergebenen Baum gesetzt.
 	 * 
 	 * @param b Der neue linke Teilbaum.
 	 */
@@ -213,7 +213,7 @@ public class BinTree {
 	}
 
 	/**
-	 * Der linke Teilbaum des Baumes wird gelöscht.
+	 * Der linke Teilbaum des Baumes wird gelÃ¶scht.
 	 */
 	public void deleteLeft() {
 		links = null;
@@ -221,7 +221,7 @@ public class BinTree {
 
 	/**
 	 * Wenn der Baum einen rechten Teilbaum besitzt, wird der Wert wahr
-	 * zurückgegeben, sonst der Wert falsch.
+	 * zurÃ¼ckgegeben, sonst der Wert falsch.
 	 * 
 	 * @return true, wenn ein rechter Teilbaum existiert, sonst false.
 	 */
@@ -230,7 +230,7 @@ public class BinTree {
 	}
 
 	/**
-	 * Der rechte Teilbaum des Baumes wird zurückgegeben.
+	 * Der rechte Teilbaum des Baumes wird zurÃ¼ckgegeben.
 	 * 
 	 * @return Der rechte Teilbaum.
 	 */
@@ -239,7 +239,7 @@ public class BinTree {
 	}
 
 	/**
-	 * Der rechte Teilbaum des Baumes wird auf den übergebenen Baum gesetzt.
+	 * Der rechte Teilbaum des Baumes wird auf den Ã¼bergebenen Baum gesetzt.
 	 * 
 	 * @param b Der neue rechte Teilbaum.
 	 */
@@ -248,23 +248,23 @@ public class BinTree {
 	}
 
 	/**
-	 * Der rechte Teilbaum des Baumes wird gelöscht.
+	 * Der rechte Teilbaum des Baumes wird gelÃ¶scht.
 	 */
 	public void deleteRight() {
 		rechts = null;
 	}
 
 	/**
-	 * Visualisierung eines Binärbaums in Processing - Wrapper-Methode
+	 * Visualisierung eines BinÃ¤rbaums in Processing - Wrapper-Methode
 	 * 
-	 * @param sketch Das PApplet-Objekt für die Visualisierung.
+	 * @param sketch Das PApplet-Objekt fÃ¼r die Visualisierung.
 	 */
 	public void drawBinTree(PApplet sketch) {
 		gui.drawBinTree(sketch);
 	}
 
 	/**
-	 * Methode zur Bestimmung der Tiefe, die für das Zeichnen benötigt wird.
+	 * Methode zur Bestimmung der Tiefe, die fÃ¼r das Zeichnen benÃ¶tigt wird.
 	 * 
 	 * @return Die Tiefe des Baumes.
 	 */
@@ -278,7 +278,7 @@ public class BinTree {
 	}
 
 	/**
-	 * Fügt einen Knoten zum Baum hinzu (zufällige Verteilung).
+	 * FÃ¼gt einen Knoten zum Baum hinzu (zufÃ¤llige Verteilung).
 	 * 
 	 * @param value Der Wert des neuen Knotens (Integer).
 	 */
@@ -299,7 +299,7 @@ public class BinTree {
 	}
 
 	/**
-	 * Fügt einen Knoten zum Baum hinzu (zufällige Verteilung).
+	 * FÃ¼gt einen Knoten zum Baum hinzu (zufÃ¤llige Verteilung).
 	 * 
 	 * @param value Der Wert des neuen Knotens (String).
 	 */
@@ -321,7 +321,7 @@ public class BinTree {
 	}
 
 	/**
-	 * Setzt den Baum zurück.
+	 * Setzt den Baum zurÃ¼ck.
 	 */
 	void reset() {
 		this.inh = new Inhalt();
@@ -330,7 +330,7 @@ public class BinTree {
 	}
 
 	/**
-	 * Klasse Inhalt zur internen Verwaltung der einzelnen Elemente des Binärbaums.
+	 * Klasse Inhalt zur internen Verwaltung der einzelnen Elemente des BinÃ¤rbaums.
 	 */
 	protected class Inhalt {
 		private int zahl = -1;
@@ -345,7 +345,7 @@ public class BinTree {
 		}
 
 		/**
-		 * Die Ganzzahl des Inhalts wird auf die übergebene Zahl gesetzt.
+		 * Die Ganzzahl des Inhalts wird auf die Ã¼bergebene Zahl gesetzt.
 		 * 
 		 * @param z Die neue Ganzzahl.
 		 */
@@ -354,7 +354,7 @@ public class BinTree {
 		}
 
 		/**
-		 * Die Zeichenkette des Inhalts wird auf die übergebene Zeichenkette gesetzt.
+		 * Die Zeichenkette des Inhalts wird auf die Ã¼bergebene Zeichenkette gesetzt.
 		 * 
 		 * @param s Die neue Zeichenkette.
 		 */
@@ -363,7 +363,7 @@ public class BinTree {
 		}
 
 		/**
-		 * Die Ganzzahl des Inhalts wird zurückgegeben.
+		 * Die Ganzzahl des Inhalts wird zurÃ¼ckgegeben.
 		 * 
 		 * @return Die Ganzzahl.
 		 */
@@ -372,7 +372,7 @@ public class BinTree {
 		}
 
 		/**
-		 * Die Zeichenkette des Inhalts wird zurückgegeben.
+		 * Die Zeichenkette des Inhalts wird zurÃ¼ckgegeben.
 		 * 
 		 * @return Die Zeichenkette.
 		 */
@@ -381,7 +381,7 @@ public class BinTree {
 		}
 
 		/**
-		 * Wenn der Inhalt leer ist, wird der Wert wahr zurückgegeben, sonst der Wert
+		 * Wenn der Inhalt leer ist, wird der Wert wahr zurÃ¼ckgegeben, sonst der Wert
 		 * falsch.
 		 * 
 		 * @return true, wenn der Inhalt leer ist, sonst false.
