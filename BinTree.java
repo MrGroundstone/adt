@@ -68,6 +68,64 @@ public class BinTree {
 		inh.setZahl(z);
 	}
 
+	public void traversiere(String input, String type) {
+		ArrayList<BinTree> nodesList = new ArrayList<>();
+		String rootName = input.split(" ")[0];
+
+		for (String segment : input.split(" ")) {
+			nodesList.add(new BinTree(segment));
+		}
+
+
+		// calculate nodes per level
+		List<Integer> nodesPerLevel = new ArrayList<>();
+		int level = 0;
+		int n = nodesList.size();
+		while (n > 0) {
+			int nodesAtCurrentLevel = Math.min((int) Math.pow(2, level), n);
+			nodesPerLevel.add(nodesAtCurrentLevel);
+			n -= nodesAtCurrentLevel;
+			level++;
+		}
+
+
+		// level Traversion
+		if (Objects.equals(type, "level")) {
+			// create root element
+			this.inh.setText(rootName);
+			nodesList.remove(0);
+
+			// current item to append
+			int pointer = nodesPerLevel.get(1);
+			// node the item is appendend to
+			int lastNode = 0;
+			for (int i = 1; i < nodesPerLevel.size(); i++ )  {
+				for (int j = 0; j < nodesPerLevel.get(i) ; j++ )  {
+					if (i == 1) {
+						if (j % 2 == 0) {
+							this.setLeft(nodesList.get(0));
+						}else {
+							this.setRight(nodesList.get(1));
+						}
+					}else{
+						BinTree current = nodesList.get(pointer);
+						if (j % 2 == 0) {
+							nodesList.get(lastNode).setLeft(current);
+						}else {
+							nodesList.get(lastNode).setRight(current);
+							lastNode++;
+						}
+						pointer++;
+					}
+
+				}
+			}
+
+		}
+
+	}
+
+
 	/**
 	 * Der Baum wird zu einem Beispielbaum umgewandelt.
 	 */
