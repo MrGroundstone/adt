@@ -332,7 +332,7 @@ public class BinTree {
 	/**
 	 * Klasse Inhalt zur internen Verwaltung der einzelnen Elemente des Binärbaums.
 	 */
-	protected class Inhalt {
+	 public class Inhalt {
 		private int zahl = -1;
 		private String text = "";
 
