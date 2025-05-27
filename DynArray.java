@@ -39,7 +39,7 @@ public class DynArray<T> {
     // Ende Attribute
     
     @SuppressWarnings({ "rawtypes", "unchecked" })
-	private GUI gui = new GUI(this);
+    private GUI gui = new GUI(this);
 
     /**
      * Konstruktor für ein leeres DynArray.
@@ -95,13 +95,16 @@ public class DynArray<T> {
      * @param inhalt Der Inhalt des hinzuzufügenden Elements.
      */
     public void append1(T inhalt) {
-        if (!isEmpty()) {
-            getElement(getLaenge()).naechstes = new Element(inhalt);
+        Element neu = new Element(inhalt);
+        if (isEmpty()) {
+            kopf = neu;
         } else {
-            kopf = new Element(inhalt);
+            Element letzter = getElement(laenge - 1);
+            letzter.naechstes = neu;
         }
-        setLaenge(getLaenge() + 1);
+        laenge++;
     }
+
 
     /**
      * Fügt ein Element an einem bestimmten Index ein.
@@ -133,11 +136,12 @@ public class DynArray<T> {
      * @param inhalt Der neue Inhalt des Elements.
      */
     public void setItem(int index, T inhalt) {
-        if (index > 0 && index <= getLaenge()) {
+        if (index >= 0 && index < laenge) {
             Element temp = getElement(index);
             temp.inhalt = inhalt;
         }
     }
+
 
     /**
      * Löscht das Element an einem bestimmten Index.
@@ -165,9 +169,9 @@ public class DynArray<T> {
      * @return Das Element am angegebenen Index oder null, wenn der Index ungültig ist.
      */
     private Element getElement(int index) {
-        if (getLaenge() >= index) {
+        if (index >= 0 && index < laenge) {
             Element aktuell = kopf;
-            for (int i = 1; i < index; i++) {
+            for (int i = 0; i < index; i++) {
                 aktuell = aktuell.naechstes;
             }
             return aktuell;
@@ -175,12 +179,13 @@ public class DynArray<T> {
         return null;
     }
 
+
     /**
      * Visualisierung eines DynArray in Processing.
      * @param sketch Der PApplet, auf dem gezeichnet wird.
      */
     public void drawDynArray(PApplet sketch) {
-        gui.drawStack(sketch);
+        gui.drawDynArray(sketch);
     }
     
     /**
