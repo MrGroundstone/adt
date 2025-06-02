@@ -27,9 +27,14 @@ jobs:
       - name: Build with Gradle
         id: build
         run: gradle -PgithubReleaseTag=${{ env.RELEASE_TAG }} buildReleaseArtifacts
-      - name: Release
-        uses: softprops/action-gh-release@v2
-        if: github.ref_type == 'tag'
+      - name: release
+      - uses: "marvinpinto/action-automatic-releases@latest"
         with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: false
+          title: "Release"
           files: |
             release/*.jar
+
+
