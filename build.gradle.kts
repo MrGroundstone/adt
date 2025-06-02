@@ -49,6 +49,11 @@ tasks.test {
 }
 
 
+val releaseRoot = "$rootDir/release"
+val releaseName = adt-informatik
+val releaseDirectory = "$releaseRoot/$releaseName"
+
+
 tasks.build.get().mustRunAfter("clean")
 
 tasks.register("buildReleaseArtifacts") {
