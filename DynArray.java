@@ -142,6 +142,17 @@ public class DynArray<T> {
         }
     }
 
+    public void print() {
+        PApplet.print("[");
+        for (int i = 0; i < laenge; i++) {
+            if (this.getItem(i) instanceof BinTree b) {
+                PApplet.print( b.getItem().getText() + ",");
+            }else{
+                PApplet.print(this.getItem(i) + ",");
+            }
+        }
+        PApplet.print("]\n");
+    }
 
     /**
      * Löscht das Element an einem bestimmten Index.
