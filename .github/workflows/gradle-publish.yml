@@ -36,5 +36,6 @@ jobs:
           title: "Release"
           files: |
             release/adt/library/*.jar
+            release/adt.zip
 
 
