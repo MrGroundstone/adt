@@ -21,7 +21,7 @@ version = if (project.hasProperty("githubReleaseTag")) {
     libraryProperties.getProperty("prettyVersion")
 }
 
-val libName = "adt-informatik"
+val libName = "adt"
 
 group = "com.Wolfgang"
 repositories {
@@ -50,7 +50,7 @@ tasks.test {
 
 
 val releaseRoot = "$rootDir/release"
-val releaseName = adt-informatik
+val releaseName = "adt"
 val releaseDirectory = "$releaseRoot/$releaseName"
 
 
