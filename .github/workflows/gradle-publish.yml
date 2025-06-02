@@ -35,6 +35,6 @@ jobs:
           prerelease: false
           title: "Release"
           files: |
-            release/*.jar
+            release/adt/library/*.jar
 
 
