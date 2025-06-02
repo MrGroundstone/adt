@@ -74,7 +74,6 @@ tasks.build.get().mustRunAfter("clean")
 tasks.register("buildReleaseArtifacts") {
     group = "processing"
     dependsOn("clean","build", "writeLibraryProperties")
-    finalizedBy("packageRelease", "duplicateZipToPdex")
 
     doFirst {
         println("Releasing library $libName")
