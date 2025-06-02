@@ -11,6 +11,14 @@ java {
     }
 }
 
+sourceSets {
+    main {
+        java {
+            setSrcDirs(listOf("."))
+        }
+    }
+}
+
 val libraryProperties = Properties().apply {
     load(rootProject.file("release.properties").inputStream())
 }
@@ -74,7 +82,7 @@ tasks.build.get().mustRunAfter("clean")
 tasks.register("buildReleaseArtifacts") {
     group = "processing"
     dependsOn("clean","build", "writeLibraryProperties")
-
+    finalizedBy("packageRelease")
     doFirst {
         println("Releasing library $libName")
         println(org.gradle.internal.jvm.Jvm.current())
@@ -115,4 +123,17 @@ tasks.register("buildReleaseArtifacts") {
             rename("library.properties", "$libName.txt")
         }
     }
+}
+
+
+tasks.register<Zip>("packageRelease") {
+    dependsOn("buildReleaseArtifacts")
+    doFirst {
+        println("Create zip file...")
+    }
+    archiveFileName.set("${libName}.zip")
+    from(releaseDirectory)
+    into(releaseName)
+    destinationDirectory.set(file(releaseRoot))
+    exclude("**/*.DS_Store")
 }
