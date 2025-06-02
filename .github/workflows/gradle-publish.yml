@@ -29,6 +29,7 @@ jobs:
         run: gradle -PgithubReleaseTag=${{ env.RELEASE_TAG }} buildReleaseArtifacts
       - name: Release
         uses: softprops/action-gh-release@v2
+        if: github.ref_type == 'tag'
         with:
           files: |
             release/*.jar
