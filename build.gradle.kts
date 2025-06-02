@@ -53,6 +53,21 @@ val releaseRoot = "$rootDir/release"
 val releaseName = "adt"
 val releaseDirectory = "$releaseRoot/$releaseName"
 
+tasks.register<WriteProperties>("writeLibraryProperties") {
+    group = "processing"
+    destinationFile = project.file("library.properties")
+
+    property("name", libraryProperties.getProperty("name"))
+    property("version", libraryProperties.getProperty("version"))
+    property("prettyVersion", project.version)
+    property("authors", libraryProperties.getProperty("authors"))
+    property("url", libraryProperties.getProperty("url"))
+    property("categories", libraryProperties.getProperty("categories"))
+    property("sentence", libraryProperties.getProperty("sentence"))
+    property("paragraph", libraryProperties.getProperty("paragraph"))
+    property("minRevision", libraryProperties.getProperty("minRevision"))
+    property("maxRevision", libraryProperties.getProperty("maxRevision"))
+}
 
 tasks.build.get().mustRunAfter("clean")
 
