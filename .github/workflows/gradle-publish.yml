@@ -35,10 +35,21 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
 
-    # The USERNAME and TOKEN need to correspond to the credentials environment variables used in
-    # the publishing section of your build.gradle
-    - name: Publish to GitHub Packages
-      run: ./gradlew publish
-      env:
-        USERNAME: ${{ github.actor }}
-        TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Package into JAR
+      run: |
+         jar cf adt.jar -C out .
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+         name: adt-jar
+         path: adt.jar
+
+    - name: Create GitHub Release
+      uses: ncipollo/release-action@v1
+      with:
+         artifacts: adt.jar
+         tag: ${{ github.ref_name }}
+         name: Release ${{ github.ref_name }}
+         body: |
+           Automated release for version ${{ github.ref_name }}.
